@@ -1,0 +1,16 @@
+apiVersion: 1
+
+datasources:
+  - name: incidents
+    type: postgres
+    access: proxy
+    url: postgres:5432
+    database: incidents
+    user: root
+    secureJsonData:
+      password: admin1
+    jsonData:
+      sslmode: disable
+      postgresVersion: 1600
+      timescaledb: false
+    isDefault: true

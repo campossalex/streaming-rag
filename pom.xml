@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- NOT org.apache.flink: the shade artifactSet below excludes Flink by groupId, and a
+       matching groupId here silently drops this project's own classes from the fat jar.
+       Change to your organisation's groupId. If you upstream this to the ASF, the groupId
+       becomes org.apache.flink and the excludes must then be listed per artifact. -->
+  <groupId>com.example.flink</groupId>
+  <artifactId>flink-connector-milvus</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>Flink Milvus Vector Search Connector</name>
+
+  <properties>
+    <flink.version>2.3.0</flink.version>
+    <milvus.version>3.0.6</milvus.version>
+    <junit.version>5.11.4</junit.version>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <shade.base>org.apache.flink.connector.milvus.shaded</shade.base>
+  </properties>
+
+  <dependencies>
+    <!-- Provided by the Flink distribution. -->
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-table-common</artifactId>
+      <version>${flink.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-core</artifactId>
+      <version>${flink.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.36</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Bundled and relocated into the fat jar. -->
+    <dependency>
+      <groupId>io.milvus</groupId>
+      <artifactId>milvus-sdk-java</artifactId>
+      <version>${milvus.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.6.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals><goal>shade</goal></goals>
+            <configuration>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <artifactSet>
+                <excludes>
+                  <!-- Explicit, never a groupId wildcard. These are 'provided' anyway. -->
+                  <exclude>org.apache.flink:flink-table-common</exclude>
+                  <exclude>org.apache.flink:flink-core</exclude>
+                  <exclude>org.slf4j:slf4j-api</exclude>
+                </excludes>
+              </artifactSet>
+              <!--
+                Milvus drags in gRPC, protobuf, Netty and Guava. Flink ships its own copies of
+                several of these. Without relocation you get NoSuchMethodError at runtime, not at
+                compile time. Every one of these prefixes is load-bearing.
+              -->
+              <relocations>
+                <relocation><pattern>io.grpc</pattern><shadedPattern>${shade.base}.io.grpc</shadedPattern></relocation>
+                <relocation><pattern>io.netty</pattern><shadedPattern>${shade.base}.io.netty</shadedPattern></relocation>
+                <relocation><pattern>com.google.protobuf</pattern><shadedPattern>${shade.base}.com.google.protobuf</shadedPattern></relocation>
+                <relocation><pattern>com.google.common</pattern><shadedPattern>${shade.base}.com.google.common</shadedPattern></relocation>
+                <relocation><pattern>com.google.gson</pattern><shadedPattern>${shade.base}.com.google.gson</shadedPattern></relocation>
+                <relocation><pattern>org.apache.commons</pattern><shadedPattern>${shade.base}.org.apache.commons</shadedPattern></relocation>
+              </relocations>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                    <exclude>module-info.class</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+              <transformers>
+                <!-- Merges our Factory SPI file with any bundled ones. Without this the
+                     connector silently fails to register. -->
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

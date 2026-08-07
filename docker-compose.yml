@@ -1,0 +1,344 @@
+# Flink 2.3 + Milvus v3.0.0 + Kafka, with the Milvus vector-search connector built from source.
+#
+# The etcd / minio / standalone services below follow the official Milvus standalone compose file
+# (milvus.io/docs/install_standalone-docker-compose.md) : same images, same env, same healthchecks,
+# and the same ${DOCKER_VOLUME_DIRECTORY:-.}/volumes bind mounts, so `rm -rf volumes` still wipes
+# Milvus state exactly as the Milvus docs describe. Deviations are noted inline.
+#
+#   docker compose up -d --build
+#   docker compose run --rm seeder
+#   docker compose exec jobmanager /opt/submit.sh
+
+name: flink-milvus-rag
+
+services:
+  # ============================ Milvus (per official compose) ============================
+  etcd:
+    container_name: milvus-etcd
+    image: quay.io/coreos/etcd:v3.5.25
+    environment:
+      - ETCD_AUTO_COMPACTION_MODE=revision
+      - ETCD_AUTO_COMPACTION_RETENTION=1000
+      - ETCD_QUOTA_BACKEND_BYTES=4294967296
+      - ETCD_SNAPSHOT_COUNT=50000
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/etcd:/etcd
+    command: etcd -advertise-client-urls=http://etcd:2379 -listen-client-urls http://0.0.0.0:2379 --data-dir /etcd
+    healthcheck:
+      test: ["CMD", "etcdctl", "endpoint", "health"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  minio:
+    container_name: milvus-minio
+    image: minio/minio:RELEASE.2024-05-28T17-19-04Z
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - "9001:9001"
+      - "9000:9000"
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/minio:/minio_data
+    command: minio server /minio_data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  standalone:
+    container_name: milvus-standalone
+    image: milvusdb/milvus:v3.0.0
+    command: ["milvus", "run", "standalone"]
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      MINIO_REGION: us-east-1
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9091/healthz"]
+      interval: 30s
+      start_period: 90s
+      timeout: 20s
+      retries: 3
+    ports:
+      - "19530:19530"
+      - "9091:9091"   # Milvus WebUI at http://localhost:9091/webui/
+    depends_on:
+      - "etcd"
+      - "minio"
+
+  # ============================ Kafka (KRaft, single node) ============================
+  kafka:
+    container_name: kafka
+    image: apache/kafka:3.9.0
+    ports:
+      - "9092:9092"
+    environment:
+      # Kept close to the apache/kafka image's own documented combined-mode example.
+      # Earlier revisions of this file omitted INTER_BROKER_LISTENER_NAME,
+      # TRANSACTION_STATE_LOG_MIN_ISR and LOG_DIRS, which are present in the upstream
+      # example for a reason; do not trim them back out.
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server kafka:9092 >/dev/null 2>&1"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+
+  # ============================ Flink 2.3 ============================
+  jobmanager:
+    container_name: jobmanager
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+    image: flink-milvus:2.3.0
+    command: jobmanager
+    ports:
+      - "8081:8081"
+    env_file: [.env]
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        rest.address: 0.0.0.0
+        execution.checkpointing.interval: 30s
+        state.backend.type: rocksdb
+        table.exec.async-vector-search.max-concurrent-operations: 8
+        table.exec.async-vector-search.timeout: 30s
+        # Async model inference. Without this the planner call is synchronous at parallelism 1,
+        # the pipeline tops out near one alarm every two seconds, and any faster generator
+        # builds an unbounded backlog.
+        #
+        # Both numbers are set from failure, not taste. At 12 concurrent the calls trip OpenAI
+        # rate limiting, queue behind each other, blow a 60s timeout, and the AsyncWaitOperator
+        # FAILS THE TASK -- which replays from checkpoint and times out again, so the job
+        # restart-loops and the output topic stops dead rather than merely slowing down.
+        # 4 concurrent keeps well inside the rate limit; 180s is long enough that a genuinely
+        # slow call degrades throughput instead of killing the job.
+        table.exec.async-ml-predict.max-concurrent-operations: 4
+        table.exec.async-ml-predict.timeout: 180s
+        table.exec.async-ml-predict.output-mode: ALLOW_UNORDERED
+    volumes:
+      - ./deploy/sql:/opt/sql:ro
+    depends_on:
+      standalone:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+
+  taskmanager:
+    # Deliberately no build: block. It shares jobmanager's image, and two services that
+    # both build the same image: tag make buildx bake export the tag twice in parallel,
+    # which fails with 'image already exists'. Build once via jobmanager; pull_policy
+    # never means a missing image reports a clear local error instead of a registry 404.
+    image: flink-milvus:2.3.0
+    pull_policy: never
+    command: taskmanager
+    env_file: [.env]
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        # Four jobs now, not one, and each needs at least one slot. 4 slots would leave no
+        # headroom for a smoke test or an ad-hoc query while the pipeline runs.
+        taskmanager.numberOfTaskSlots: 8
+        taskmanager.memory.process.size: 2560m
+    depends_on:
+      - jobmanager
+    deploy:
+      replicas: 1
+
+  # ============================ incident store ============================
+  # System of record for alarms, triage, planner output and incident state. Written by the
+  # Flink JDBC sink and by the planner UI; read by the UI and Grafana.
+  #
+  # init.sql runs from docker-entrypoint-initdb.d, which only fires when the data directory is
+  # empty. Editing it does not migrate a running database -- './run.sh clean' or
+  # 'docker compose down -v' is what makes it re-apply.
+  postgres:
+    container_name: postgres
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: admin1
+      POSTGRES_DB: incidents
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./deploy/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d incidents"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ============================ machine alarm generator ============================
+  # Produces JSON alarms to the `machine_alarms` topic, which the Flink job reads. This used
+  # to be a `datagen` table inside the pipeline SQL; moving it out means the event vocabulary,
+  # the telemetry model and the fault/asset compatibility rules are ordinary Python.
+  #
+  # It is the ONLY throttle on OpenAI spend AND the only throttle on throughput, because
+  # nothing downstream applies backpressure to a generator that just keeps producing.
+  #
+  # 0.1/s is deliberate and was arrived at by measurement, not guesswork. With async inference
+  # at 4 concurrent calls the pipeline sustains roughly 0.16 alarms/second end to end; the
+  # Kafka source for alarm-context is chained to the planner call in the job graph and job
+  # parallelism is 1, so that is the real ceiling. This leaves clear headroom.
+  #
+  # Set it above the ceiling and the failure is quiet, not loud: planning_lag_ms climbs into
+  # the minutes, the incident store drifts behind real time, and every dashboard shows stale
+  # numbers that still look plausible. './run.sh incidents' is the check -- if planning_ms
+  # grows between two runs a few minutes apart, this is set too high.
+  #
+  # Pushing it much harder also risks HTTP 429 from OpenAI, which is worse than slow: the
+  # async operator times out, fails the task, replays from checkpoint and times out again.
+  alarms:
+    container_name: alarms
+    build:
+      context: ./deploy/datagen
+    image: milvus-alarms:1.0
+    environment:
+      KAFKA_BOOTSTRAP: kafka:9092
+      ALARMS_TOPIC: machine_alarms
+      ALARMS_PER_SECOND: "0.1"
+      BURST_PROBABILITY: "0.10"
+      # SEED: "20260807"   # uncomment for a reproducible alarm sequence
+    restart: unless-stopped
+    depends_on:
+      kafka:
+        condition: service_healthy
+
+  # ============================ one-shot corpus loader ============================
+  # `docker compose run --rm seeder`. Not started by `up` (see the manual profile).
+  seeder:
+    build:
+      context: ./deploy/seed
+    image: milvus-seeder:1.0
+    env_file: [.env]
+    profiles: ["manual"]
+    depends_on:
+      standalone:
+        condition: service_healthy
+
+  # ============================ incident management UI ============================
+  # Where a planner works the incidents the pipeline could not finish. Writes only the
+  # human-owned columns plus incident_status rows -- see deploy/planner/app.py.
+  planner:
+    container_name: planner
+    build:
+      context: ./deploy/planner
+    image: milvus-planner:1.0
+    environment:
+      PG_HOST: postgres
+      PG_DATABASE: incidents
+      PG_USER: root
+      PG_PASSWORD: admin1
+      PLANNER_NAME: planner
+    ports:
+      - "9052:9052"
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ============================ dashboards ============================
+  # File-provisioned, matching the compose-based sibling scenario rather than the k8s ones,
+  # which import dashboards over the HTTP API at scenario start.
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:11.3.0
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_USERS_DEFAULT_THEME: dark
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./deploy/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./deploy/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ============================ optional extras ============================
+  # Browse the corpus and verify retrieval by hand. Started together with Redpanda Console
+  # by './run.sh console'.
+  #
+  # v2.5 against a v3.0.0 server is deliberate: the Attu release line trails Milvus (newest
+  # stable is v2.6, and only a v3.0.0-beta targets 3.0), and v2.5 browses a 3.0 collection
+  # fine. Confirmed against this stack.
+  attu:
+    container_name: attu
+    image: zilliz/attu:v2.5
+    environment:
+      MILVUS_URL: milvus-standalone:19530
+    ports:
+      - "8000:3000"
+    profiles: ["tools"]
+    depends_on:
+      standalone:
+        condition: service_healthy
+
+  # Browse the Kafka topics and read individual events: ./run.sh console
+  #
+  # Redpanda Console is a Kafka-protocol client, not a broker -- it points at the existing
+  # apache/kafka service and needs no change to it. Do NOT swap the broker for Redpanda to
+  # get this UI; the pipeline is already validated against apache/kafka 3.9.0.
+  #
+  # Port 8080 is the image's default; it is remapped to 8090 because 8081 is the Flink UI
+  # and 8000 is Attu. Config goes through the v2 KAFKA_* environment variables -- the v3
+  # images renamed these to a config file / CONFIG_FILEPATH, so pin the major version.
+  console:
+    container_name: redpanda-console
+    image: docker.redpanda.com/redpandadata/console:v2.8.5
+    environment:
+      KAFKA_BROKERS: kafka:9092
+      # Without this the UI shows raw bytes for the JSON payloads Flink writes.
+      KAFKA_SCHEMAREGISTRY_ENABLED: "false"
+    ports:
+      - "8090:8080"
+    profiles: ["tools"]
+    depends_on:
+      kafka:
+        condition: service_healthy
+
+  # Local OpenAI-compatible models: docker compose --profile local-llm up -d ollama
+  ollama:
+    container_name: ollama
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    profiles: ["local-llm"]
+
+volumes:
+  ollama_data:
+  pg_data:
+
+networks:
+  default:
+    name: flink-milvus-rag

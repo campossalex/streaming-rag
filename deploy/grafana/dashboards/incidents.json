@@ -1,0 +1,422 @@
+{
+  "uid": "incidents",
+  "title": "Maintenance incidents",
+  "tags": [
+    "flink",
+    "milvus",
+    "rag"
+  ],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "10s",
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Is the pipeline alive?",
+      "type": "row",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "panels": []
+    },
+    {
+      "id": 2,
+      "title": "Incidents last hour",
+      "type": "stat",
+      "datasource": "incidents",
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT count(*) AS value FROM incident WHERE created_at > now() - interval '1 hour'",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Needs a human",
+      "type": "stat",
+      "datasource": "incidents",
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 1
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT count(*) AS value FROM incident_current WHERE needs_human AND status NOT IN ('RESOLVED','CLOSED','REJECTED')",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area"
+      }
+    },
+    {
+      "id": 4,
+      "title": "SLA breached",
+      "type": "stat",
+      "datasource": "incidents",
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 1
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT count(*) AS value FROM incident_current WHERE sla_breached",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area"
+      }
+    },
+    {
+      "id": 5,
+      "title": "End to end p50 (ms)",
+      "type": "stat",
+      "datasource": "incidents",
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 1
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT COALESCE(percentile_cont(0.5) WITHIN GROUP (ORDER BY total_lag_ms), 0) AS value FROM incident WHERE t_action > now() - interval '15 minutes'",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area"
+      }
+    },
+    {
+      "id": 6,
+      "title": "End to end p95 (ms)",
+      "type": "stat",
+      "datasource": "incidents",
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 1
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT COALESCE(percentile_cont(0.95) WITHIN GROUP (ORDER BY total_lag_ms), 0) AS value FROM incident WHERE t_action > now() - interval '15 minutes'",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area"
+      }
+    },
+    {
+      "id": 7,
+      "title": "Grounded answers",
+      "type": "stat",
+      "datasource": "incidents",
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 1
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT round(100.0 * count(*) FILTER (WHERE NOT needs_human) / NULLIF(count(*),0)) AS value FROM incident_current WHERE created_at > now() - interval '1 hour'",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 10,
+      "title": "Latency",
+      "type": "row",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "panels": []
+    },
+    {
+      "id": 11,
+      "title": "Latency over time",
+      "type": "timeseries",
+      "datasource": "incidents",
+      "gridPos": {
+        "h": 8,
+        "w": 16,
+        "x": 0,
+        "y": 6
+      },
+      "targets": [
+        {
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT $__timeGroupAlias(t_action, '1m'), avg(retrieval_lag_ms) AS \"embed + retrieve\", avg(planning_lag_ms) AS \"planner call\", avg(total_lag_ms) AS \"end to end\" FROM incident WHERE $__timeFilter(t_action) GROUP BY 1 ORDER BY 1",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "custom": {
+            "lineWidth": 1,
+            "fillOpacity": 6
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 12,
+      "title": "Where the time goes",
+      "type": "table",
+      "datasource": "incidents",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 6
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT round(avg(retrieval_lag_ms)) AS \"embed + retrieve (ms)\", round(avg(planning_lag_ms)) AS \"planner call (ms)\", round(avg(total_lag_ms)) AS \"end to end (ms)\", max(total_lag_ms) AS \"worst (ms)\" FROM incident WHERE $__timeFilter(t_action)",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Triage and retrieval",
+      "type": "row",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "panels": []
+    },
+    {
+      "id": 21,
+      "title": "Current status",
+      "type": "piechart",
+      "datasource": "incidents",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 15
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT status AS metric, count(*) AS value FROM incident_current WHERE $__timeFilter(created_at) GROUP BY 1 ORDER BY 2 DESC",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Priority by queue",
+      "type": "table",
+      "datasource": "incidents",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 15
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT queue, count(*) FILTER (WHERE priority='P1') AS \"P1\", count(*) FILTER (WHERE priority='P2') AS \"P2\", count(*) FILTER (WHERE priority='P3') AS \"P3\", count(*) FILTER (WHERE priority='P4') AS \"P4\", count(*) AS total FROM incident WHERE $__timeFilter(created_at) AND queue IS NOT NULL GROUP BY 1 ORDER BY total DESC",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Retrieval confidence",
+      "type": "table",
+      "datasource": "incidents",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 15
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT match_confidence AS confidence, count(*) AS incidents, round(min(score)::numeric,3) AS worst, round(avg(score)::numeric,3) AS avg, round(max(score)::numeric,3) AS best FROM incident WHERE $__timeFilter(created_at) AND match_confidence IS NOT NULL GROUP BY 1 ORDER BY 4 DESC",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "The queue",
+      "type": "row",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "panels": []
+    },
+    {
+      "id": 31,
+      "title": "Most retrieved manual sections",
+      "type": "table",
+      "datasource": "incidents",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 24
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT doc_ref, matched_section AS section, count(*) AS hits, round(avg(score)::numeric,3) AS avg_score FROM incident WHERE $__timeFilter(created_at) AND doc_ref IS NOT NULL GROUP BY 1,2 ORDER BY hits DESC LIMIT 10",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "title": "Waiting on a human",
+      "type": "table",
+      "datasource": "incidents",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 24
+      },
+      "targets": [
+        {
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT asset_id, fault_code, priority, status, COALESCE(doc_ref,'none') AS retrieved, round(score::numeric,3) AS score, sla_due FROM incident_current WHERE needs_human AND status NOT IN ('RESOLVED','CLOSED','REJECTED') ORDER BY CASE priority WHEN 'P1' THEN 1 WHEN 'P2' THEN 2 WHEN 'P3' THEN 3 ELSE 4 END, sla_due NULLS LAST LIMIT 20",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "templating": {
+    "list": []
+  }
+}

@@ -1,0 +1,2102 @@
+[
+ [
+  "Clamp cylinder creep is confirmed when the measured value falls below 187 Nm. The usual cause is contamination tracking in from the surrounding process. Renew MK-7675 and re-datum before returning the asset to production, then log the new reading in the machine book. Two people are required for this lift. Allow seventy minutes.",
+  "mechanical",
+  "Clamp cylinder creep",
+  "SM-11.2-MK001",
+  3
+ ],
+ [
+  "Fieldbus CRC errors is confirmed when the measured value exceeds 232 mV. The usual cause is a worn fieldbus rather than the control system. Renew EK-4605 and re-datum before returning the asset to production, then check the trend again on the next shift. Wear eye protection: the assembly is under spring load. Allow twenty five minutes.",
+  "electrical",
+  "Fieldbus CRC errors",
+  "SM-11.2-EK001",
+  3
+ ],
+ [
+  "Cylinder rod seal weep is confirmed when the measured value exceeds 23 ml/min. The usual cause is an upstream supply problem rather than the cylinder rod seal itself. Swap HK-9514 and check against the acceptance figure in this chapter, then confirm the figure has returned inside tolerance. Allow twenty minutes.",
+  "hydraulic",
+  "Cylinder rod seal weep",
+  "SM-11.2-HK001",
+  3
+ ],
+ [
+  "When hydraulic hose abrasion appears, the reading falls below 142 bar before any other symptom shows. Treat it as an upstream supply problem rather than the hydraulic hose itself. Install HK-9518, then leave the machine on a dry cycle before loading it. Two people are required for this lift. Allow seventy minutes.",
+  "hydraulic",
+  "Hydraulic hose abrasion",
+  "SM-11.3-HK002",
+  2
+ ],
+ [
+  "When proportional valve hysteresis appears, the reading falls below 54 bar before any other symptom shows. Treat it as fatigue at the mounting rather than the proportional valve body. Fit replacement HK-4877 and re-run the commissioning check. Wear eye protection: the assembly is under spring load. Allow twenty five minutes.",
+  "hydraulic",
+  "Proportional valve hysteresis",
+  "SM-11.4-HK003",
+  2
+ ],
+ [
+  "Resolver phase error is confirmed when the measured value exceeds 400 mV. The usual cause is a worn resolver rather than the control system. Replace resolver using kit EK-3906, then check the trend again on the next shift. Allow fifteen minutes.",
+  "electrical",
+  "Resolver phase error",
+  "SM-11.3-EK002",
+  2
+ ],
+ [
+  "When contactor welded contacts appears, the reading exceeds 125 mV before any other symptom shows. Treat it as fatigue at the mounting rather than the contactor body. Install EK-6365, then leave the machine on a dry cycle before loading it. Allow half a shift.",
+  "electrical",
+  "Contactor welded contacts",
+  "SM-11.4-EK003",
+  3
+ ],
+ [
+  "Process water loop temperature swing is confirmed when the measured value climbs past 24 degrees C. The usual cause is normal service wear reaching its limit. Renew TK-2398 and re-datum before returning the asset to production, then check the trend again on the next shift. Hot surfaces remain above 60 degrees C for some time after stopping. Allow twenty five minutes. Expect a line stop.",
+  "thermal",
+  "Process water loop temperature swing",
+  "SM-11.2-TK001",
+  4
+ ],
+ [
+  "When suction strainer blockage appears, the reading drops under 83 l/min before any other symptom shows. Treat it as a worn suction strainer rather than the control system. Install HK-4237, then leave the machine on a dry cycle before loading it. Allow an hour. Expect a line stop.",
+  "hydraulic",
+  "Suction strainer blockage",
+  "SM-11.5-HK004",
+  4
+ ],
+ [
+  "On the palletiser arm, overshoot presents as a reading that exceeds 0.07 mm. It is normal service wear reaching its limit. Fit replacement MK-8624 and re-run the commissioning check, then confirm the figure has returned inside tolerance. Allow half a shift.",
+  "mechanical",
+  "Palletiser arm overshoot",
+  "SM-11.3-MK002",
+  2
+ ],
+ [
+  "When brake resistor overheating appears, the reading climbs past 87 degrees C before any other symptom shows. Treat it as contamination tracking in from the surrounding process. Renew EK-5932 and re-datum before returning the asset to production. Allow seventy minutes.",
+  "electrical",
+  "Brake resistor overheating",
+  "SM-11.5-EK004",
+  1
+ ],
+ [
+  "When vibration damper degradation appears, the reading rises above 4 mm/s RMS before any other symptom shows. Treat it as contamination tracking in from the surrounding process. Replace vibration damper using kit MK-7842. Wear eye protection: the assembly is under spring load. Allow forty five minutes.",
+  "mechanical",
+  "Vibration damper degradation",
+  "SM-11.4-MK003",
+  1
+ ],
+ [
+  "When motor winding insulation degradation appears, the reading rises above 6 mm/s RMS before any other symptom shows. Treat it as a fastening that has relaxed under thermal cycling. Replace motor winding using kit EK-8041. Isolate and lock off before removing any cover. Allow forty five minutes.",
+  "electrical",
+  "Motor winding insulation degradation",
+  "SM-11.6-EK005",
+  2
+ ],
+ [
+  "On the gearbox, oil leak presents as a reading that exceeds 29 ml/min. It is an upstream supply problem rather than the gearbox itself. Install MK-2019, then leave the machine on a dry cycle before loading it, then repeat the measurement after fifty operating hours. Do not defeat the interlock to gain access. Allow forty minutes.",
+  "mechanical",
+  "Gearbox oil leak",
+  "SM-11.5-MK004",
+  2
+ ],
+ [
+  "Check valve leak-back is confirmed when the measured value exceeds 57 ml/min. The usual cause is a fastening that has relaxed under thermal cycling. Swap HK-3755 and check against the acceptance figure in this chapter, then repeat the measurement after fifty operating hours. Do not defeat the interlock to gain access. Allow an hour. Expect a line stop.",
+  "hydraulic",
+  "Check valve leak-back",
+  "SM-11.6-HK005",
+  4
+ ],
+ [
+  "When quench tank temperature rise appears, the reading climbs past 185 degrees C before any other symptom shows. Treat it as contamination tracking in from the surrounding process. Install TK-9642, then leave the machine on a dry cycle before loading it. Two people are required for this lift. Allow twenty five minutes.",
+  "thermal",
+  "Quench tank temperature rise",
+  "SM-11.3-TK002",
+  1
+ ],
+ [
+  "When hydraulic cooler fouling appears, the reading drops under 51 l/min before any other symptom shows. Treat it as a worn hydraulic cooler rather than the control system. Change HK-8055 as a set; matched pairs must not be mixed with used items. Two people are required for this lift. Allow two hours.",
+  "hydraulic",
+  "Hydraulic cooler fouling",
+  "SM-11.7-HK006",
+  2
+ ],
+ [
+  "Heat exchanger scaling is confirmed when the measured value drops under 39 l/min. The usual cause is contamination tracking in from the surrounding process. Install TK-9559, then leave the machine on a dry cycle before loading it, then repeat the measurement after fifty operating hours. Isolate and lock off before removing any cover. Allow two hours. Expect a line stop.",
+  "thermal",
+  "Heat exchanger scaling",
+  "SM-11.4-TK003",
+  4
+ ],
+ [
+  "On the flow divider, imbalance presents as a reading that falls below 189 bar. It is fatigue at the mounting rather than the flow divider body. Fit replacement HK-6305 and re-run the commissioning check, then log the new reading in the machine book. Allow half a shift.",
+  "hydraulic",
+  "Flow divider imbalance",
+  "SM-11.8-HK007",
+  3
+ ],
+ [
+  "When directional valve sticking appears, the reading falls below 86 bar before any other symptom shows. Treat it as fatigue at the mounting rather than the directional valve body. Install HK-9524, then leave the machine on a dry cycle before loading it. Two people are required for this lift. Allow an hour. Expect a line stop.",
+  "hydraulic",
+  "Directional valve sticking",
+  "SM-11.9-HK008",
+  4
+ ],
+ [
+  "On the two-hand control, asynchrony presents as a reading that exceeds 337 ms. It is normal service wear reaching its limit. Change SK-2060 as a set; matched pairs must not be mixed with used items, then check the trend again on the next shift. Stored energy remains after shutdown; prove dead before starting. Allow an hour.",
+  "safety",
+  "Two-hand control asynchrony",
+  "SM-11.2-SK001",
+  3
+ ],
+ [
+  "Cable gland ingress is confirmed when the measured value falls below 17.94 megohm. The usual cause is fatigue at the mounting rather than the cable gland body. Install EK-3332, then leave the machine on a dry cycle before loading it, then log the new reading in the machine book. Allow twenty minutes.",
+  "electrical",
+  "Cable gland ingress",
+  "SM-11.7-EK006",
+  1
+ ],
+ [
+  "Reservoir aeration is confirmed when the measured value drops under 52 l/min. The usual cause is fatigue at the mounting rather than the reservoir body. Replace reservoir using kit HK-4610, then confirm the figure has returned inside tolerance. Isolate and lock off before removing any cover. Allow half a shift.",
+  "hydraulic",
+  "Reservoir aeration",
+  "SM-12.1-HK009",
+  2
+ ],
+ [
+  "When slideway scoring appears, the reading exceeds 0.53 mm before any other symptom shows. Treat it as contamination tracking in from the surrounding process. Change MK-6081 as a set; matched pairs must not be mixed with used items. Stored energy remains after shutdown; prove dead before starting. Allow ninety minutes.",
+  "mechanical",
+  "Slideway scoring",
+  "SM-11.6-MK005",
+  2
+ ],
+ [
+  "Robot gripper grip loss is confirmed when the measured value falls below 83 Nm. The usual cause is fatigue at the mounting rather than the robot gripper body. Change MK-4172 as a set; matched pairs must not be mixed with used items, then repeat the measurement after fifty operating hours. Stored energy remains after shutdown; prove dead before starting. Allow twenty five minutes.",
+  "mechanical",
+  "Robot gripper grip loss",
+  "SM-11.7-MK006",
+  2
+ ],
+ [
+  "On the air dryer, dew point rise presents as a reading that climbs past 112 degrees C. It is an upstream supply problem rather than the air dryer itself. Fit replacement PK-2169 and re-run the commissioning check, then confirm the figure has returned inside tolerance. Isolate and lock off before removing any cover. Allow half a shift.",
+  "pneumatic",
+  "Air dryer dew point rise",
+  "SM-11.2-PK001",
+  3
+ ],
+ [
+  "Manifold gasket leak is confirmed when the measured value exceeds 73 ml/min. The usual cause is a setting that has drifted since commissioning. Swap PK-7991 and check against the acceptance figure in this chapter, then log the new reading in the machine book. Stored energy remains after shutdown; prove dead before starting. Allow forty minutes.",
+  "pneumatic",
+  "Manifold gasket leak",
+  "SM-11.3-PK002",
+  2
+ ],
+ [
+  "When pump coupling wear appears, the reading exceeds 0.37 mm before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Renew HK-1749 and re-datum before returning the asset to production. Isolate and lock off before removing any cover. Allow two hours.",
+  "hydraulic",
+  "Pump coupling wear",
+  "SM-12.2-HK010",
+  1
+ ],
+ [
+  "Solenoid valve slow shift is confirmed when the measured value exceeds 229 ms. The usual cause is an upstream supply problem rather than the solenoid valve itself. Renew PK-6998 and re-datum before returning the asset to production, then log the new reading in the machine book. Allow half a shift.",
+  "pneumatic",
+  "Solenoid valve slow shift",
+  "SM-11.4-PK003",
+  3
+ ],
+ [
+  "On the turntable bearing, roughness presents as a reading that rises above 9 mm/s RMS. It is fatigue at the mounting rather than the turntable bearing body. Renew MK-8440 and re-datum before returning the asset to production, then log the new reading in the machine book. Allow fifteen minutes.",
+  "mechanical",
+  "Turntable bearing roughness",
+  "SM-11.8-MK007",
+  2
+ ],
+ [
+  "When busbar hot joint appears, the reading exceeds 48 A before any other symptom shows. Treat it as contamination tracking in from the surrounding process. Fit replacement EK-4177 and re-run the commissioning check. Two people are required for this lift. Allow half a shift. Expect a line stop.",
+  "electrical",
+  "Busbar hot joint",
+  "SM-11.8-EK007",
+  4
+ ],
+ [
+  "When accumulator precharge loss appears, the reading falls below 196 bar before any other symptom shows. Treat it as fatigue at the mounting rather than the accumulator body. Renew HK-9192 and re-datum before returning the asset to production. Hot surfaces remain above 60 degrees C for some time after stopping. Allow two hours.",
+  "hydraulic",
+  "Accumulator precharge loss",
+  "SM-12.3-HK011",
+  3
+ ],
+ [
+  "On the oven element, open circuit presents as a reading that exceeds 83.45 megohm. It is normal service wear reaching its limit. Swap TK-9030 and check against the acceptance figure in this chapter, then confirm the figure has returned inside tolerance. Hot surfaces remain above 60 degrees C for some time after stopping. Allow two hours.",
+  "thermal",
+  "Oven element open circuit",
+  "SM-11.5-TK004",
+  3
+ ],
+ [
+  "On the indexer, overshoot presents as a reading that exceeds 0.85 mm. It is an upstream supply problem rather than the indexer itself. Swap MK-8142 and check against the acceptance figure in this chapter, then repeat the measurement after fifty operating hours. Hot surfaces remain above 60 degrees C for some time after stopping. Allow twenty five minutes.",
+  "mechanical",
+  "Indexer overshoot",
+  "SM-11.9-MK008",
+  1
+ ],
+ [
+  "Flexible coupling misalignment is confirmed when the measured value exceeds 0.49 mm. The usual cause is fatigue at the mounting rather than the flexible coupling body. Install MK-4936, then leave the machine on a dry cycle before loading it, then log the new reading in the machine book. Hot surfaces remain above 60 degrees C for some time after stopping. Allow two hours.",
+  "mechanical",
+  "Flexible coupling misalignment",
+  "SM-12.1-MK009",
+  2
+ ],
+ [
+  "When proximity sensor intermittent output appears, the reading exceeds 98 mV before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Change EK-8112 as a set; matched pairs must not be mixed with used items. Allow seventy minutes.",
+  "electrical",
+  "Proximity sensor intermittent output",
+  "SM-11.9-EK008",
+  1
+ ],
+ [
+  "When blow-off nozzle misdirection appears, the reading falls below 6 bar before any other symptom shows. Treat it as a setting that has drifted since commissioning. Fit replacement PK-4249 and re-run the commissioning check. Stored energy remains after shutdown; prove dead before starting. Allow ninety minutes.",
+  "pneumatic",
+  "Blow-off nozzle misdirection",
+  "SM-11.5-PK004",
+  2
+ ],
+ [
+  "When spindle cooler flow restriction appears, the reading drops under 30 l/min before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Change TK-2304 as a set; matched pairs must not be mixed with used items. Wear eye protection: the assembly is under spring load. Allow thirty minutes.",
+  "thermal",
+  "Spindle cooler flow restriction",
+  "SM-11.6-TK005",
+  2
+ ],
+ [
+  "Shielding ground loop is confirmed when the measured value exceeds 138 mV. The usual cause is a setting that has drifted since commissioning. Replace shielding using kit EK-1443, then check the trend again on the next shift. Stored energy remains after shutdown; prove dead before starting. Allow thirty minutes.",
+  "electrical",
+  "Shielding ground loop",
+  "SM-12.1-EK009",
+  3
+ ],
+ [
+  "On the way covers, wear presents as a reading that exceeds 0.76 mm. It is misalignment introduced at the last rebuild. Change MK-2832 as a set; matched pairs must not be mixed with used items, then check the trend again on the next shift. Wear eye protection: the assembly is under spring load. Allow half a shift.",
+  "mechanical",
+  "Way covers wear",
+  "SM-12.2-MK010",
+  2
+ ],
+ [
+  "Regulator creep is confirmed when the measured value falls below 146 Nm. The usual cause is fatigue at the mounting rather than the regulator body. Replace regulator using kit PK-4267, then repeat the measurement after fifty operating hours. Allow seventy minutes.",
+  "pneumatic",
+  "Regulator creep",
+  "SM-11.6-PK005",
+  2
+ ],
+ [
+  "On the induction coil, cooling loss presents as a reading that climbs past -1 degrees C. It is fatigue at the mounting rather than the induction coil body. Replace induction coil using kit TK-4202, then confirm the figure has returned inside tolerance. Isolate and lock off before removing any cover. Allow twenty five minutes.",
+  "thermal",
+  "Induction coil cooling loss",
+  "SM-11.7-TK006",
+  2
+ ],
+ [
+  "Ballscrew backlash is confirmed when the measured value exceeds 0.57 mm. The usual cause is contamination tracking in from the surrounding process. Swap MK-6916 and check against the acceptance figure in this chapter, then confirm the figure has returned inside tolerance. Isolate and lock off before removing any cover. Allow half a shift.",
+  "mechanical",
+  "Ballscrew backlash",
+  "SM-12.3-MK011",
+  3
+ ],
+ [
+  "Plc input card channel failure is confirmed when the measured value exceeds 157 mV. The usual cause is fatigue at the mounting rather than the PLC input card body. Install EK-8228, then leave the machine on a dry cycle before loading it, then check the trend again on the next shift. Stored energy remains after shutdown; prove dead before starting. Allow twenty five minutes.",
+  "electrical",
+  "Plc input card channel failure",
+  "SM-12.2-EK010",
+  2
+ ],
+ [
+  "Light curtain muting fault is confirmed when the measured value exceeds 165 ms. The usual cause is normal service wear reaching its limit. Renew SK-9179 and re-datum before returning the asset to production, then check the trend again on the next shift. Two people are required for this lift. Allow twenty five minutes.",
+  "safety",
+  "Light curtain muting fault",
+  "SM-11.3-SK002",
+  2
+ ],
+ [
+  "On the thermocouple, drift presents as a reading that falls below 173 Nm. It is misalignment introduced at the last rebuild. Renew TK-9283 and re-datum before returning the asset to production, then log the new reading in the machine book. Do not defeat the interlock to gain access. Allow fifteen minutes.",
+  "thermal",
+  "Thermocouple drift",
+  "SM-11.8-TK007",
+  2
+ ],
+ [
+  "Counterbalance drift is confirmed when the measured value falls below 64 Nm. The usual cause is fatigue at the mounting rather than the counterbalance body. Replace counterbalance using kit MK-1401, then log the new reading in the machine book. Allow fifteen minutes.",
+  "mechanical",
+  "Counterbalance drift",
+  "SM-12.4-MK012",
+  2
+ ],
+ [
+  "Drive coupling backlash is confirmed when the measured value exceeds 0.88 mm. The usual cause is contamination tracking in from the surrounding process. Renew MK-6945 and re-datum before returning the asset to production, then repeat the measurement after fifty operating hours. Two people are required for this lift. Allow forty minutes. Expect a line stop.",
+  "mechanical",
+  "Drive coupling backlash",
+  "SM-12.5-MK013",
+  4
+ ],
+ [
+  "Cam follower flat spotting is confirmed when the measured value rises above 4 mm/s RMS. The usual cause is misalignment introduced at the last rebuild. Change MK-4658 as a set; matched pairs must not be mixed with used items, then log the new reading in the machine book. Hot surfaces remain above 60 degrees C for some time after stopping. Allow half a shift. Expect a line stop.",
+  "mechanical",
+  "Cam follower flat spotting",
+  "SM-12.6-MK014",
+  4
+ ],
+ [
+  "On the timing belt, tooth wear presents as a reading that exceeds 0.14 mm. It is normal service wear reaching its limit. Fit replacement MK-7432 and re-run the commissioning check, then confirm the figure has returned inside tolerance. Allow an hour. Expect a line stop.",
+  "mechanical",
+  "Timing belt tooth wear",
+  "SM-12.7-MK015",
+  4
+ ],
+ [
+  "Vacuum generator loss of vacuum is confirmed when the measured value drops under 40 l/min. The usual cause is normal service wear reaching its limit. Swap PK-9214 and check against the acceptance figure in this chapter, then log the new reading in the machine book. Do not defeat the interlock to gain access. Allow seventy minutes.",
+  "pneumatic",
+  "Vacuum generator loss of vacuum",
+  "SM-11.7-PK006",
+  2
+ ],
+ [
+  "When safety relay cross fault appears, the reading exceeds 189 ms before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Change SK-5160 as a set; matched pairs must not be mixed with used items. Isolate and lock off before removing any cover. Allow an hour.",
+  "safety",
+  "Safety relay cross fault",
+  "SM-11.4-SK003",
+  2
+ ],
+ [
+  "On the door lock solenoid, sticking presents as a reading that falls below 74 bar. It is misalignment introduced at the last rebuild. Change SK-7818 as a set; matched pairs must not be mixed with used items, then repeat the measurement after fifty operating hours. Isolate and lock off before removing any cover. Allow two hours.",
+  "safety",
+  "Door lock solenoid sticking",
+  "SM-11.5-SK004",
+  1
+ ],
+ [
+  "Shaft seal weep is confirmed when the measured value exceeds 59 ml/min. The usual cause is normal service wear reaching its limit. Fit replacement MK-2198 and re-run the commissioning check, then repeat the measurement after fifty operating hours. Isolate and lock off before removing any cover. Allow forty minutes.",
+  "mechanical",
+  "Shaft seal weep",
+  "SM-12.8-MK016",
+  3
+ ],
+ [
+  "On the pressure switch, setpoint drift presents as a reading that falls below 117 Nm. It is normal service wear reaching its limit. Change PK-4478 as a set; matched pairs must not be mixed with used items, then log the new reading in the machine book. Allow an hour.",
+  "pneumatic",
+  "Pressure switch setpoint drift",
+  "SM-11.8-PK007",
+  3
+ ],
+ [
+  "Frl unit bowl contamination is confirmed when the measured value drops under 36 l/min. The usual cause is a worn FRL unit rather than the control system. Install PK-1294, then leave the machine on a dry cycle before loading it, then log the new reading in the machine book. Stored energy remains after shutdown; prove dead before starting. Allow fifteen minutes.",
+  "pneumatic",
+  "Frl unit bowl contamination",
+  "SM-11.9-PK008",
+  1
+ ],
+ [
+  "Return filter bypass is confirmed when the measured value exceeds 74 ml/min. The usual cause is fatigue at the mounting rather than the return filter body. Fit replacement HK-8923 and re-run the commissioning check, then log the new reading in the machine book. Allow twenty minutes.",
+  "hydraulic",
+  "Return filter bypass",
+  "SM-12.4-HK012",
+  3
+ ],
+ [
+  "Overtravel limit false trip is confirmed when the measured value exceeds 168 ms. The usual cause is a worn overtravel limit rather than the control system. Install SK-3851, then leave the machine on a dry cycle before loading it, then log the new reading in the machine book. Isolate and lock off before removing any cover. Allow two hours.",
+  "safety",
+  "Overtravel limit false trip",
+  "SM-11.6-SK005",
+  3
+ ],
+ [
+  "When quick exhaust valve restriction appears, the reading drops under 32 l/min before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Change PK-9351 as a set; matched pairs must not be mixed with used items. Stored energy remains after shutdown; prove dead before starting. Allow forty minutes.",
+  "pneumatic",
+  "Quick exhaust valve restriction",
+  "SM-12.1-PK009",
+  2
+ ],
+ [
+  "On the servo valve, null shift presents as a reading that falls below 9 bar. It is misalignment introduced at the last rebuild. Swap HK-3319 and check against the acceptance figure in this chapter, then log the new reading in the machine book. Allow fifteen minutes. Expect a line stop.",
+  "hydraulic",
+  "Servo valve null shift",
+  "SM-12.5-HK013",
+  4
+ ],
+ [
+  "When EMC filter leakage appears, the reading exceeds 69 ml/min before any other symptom shows. Treat it as a fastening that has relaxed under thermal cycling. Fit replacement EK-7393 and re-run the commissioning check. Isolate and lock off before removing any cover. Allow half a shift. Expect a line stop.",
+  "electrical",
+  "Emc filter leakage",
+  "SM-12.3-EK011",
+  4
+ ],
+ [
+  "On the rotary table, index error presents as a reading that exceeds 0.68 mm. It is a worn rotary table rather than the control system. Fit replacement MK-2653 and re-run the commissioning check, then confirm the figure has returned inside tolerance. Stored energy remains after shutdown; prove dead before starting. Allow forty minutes.",
+  "mechanical",
+  "Rotary table index error",
+  "SM-12.9-MK017",
+  1
+ ],
+ [
+  "On the terminal block, loose connection presents as a reading that exceeds 208 mV. It is misalignment introduced at the last rebuild. Install EK-4327, then leave the machine on a dry cycle before loading it, then check the trend again on the next shift. Wear eye protection: the assembly is under spring load. Allow forty minutes.",
+  "electrical",
+  "Terminal block loose connection",
+  "SM-12.4-EK012",
+  2
+ ],
+ [
+  "When roller bearing pitting appears, the reading rises above 4 mm/s RMS before any other symptom shows. Treat it as a worn roller bearing rather than the control system. Fit replacement MK-6752 and re-run the commissioning check. Allow an hour.",
+  "mechanical",
+  "Roller bearing pitting",
+  "SM-13.1-MK018",
+  2
+ ],
+ [
+  "On the earth bond, high impedance presents as a reading that falls below 38.03 megohm. It is contamination tracking in from the surrounding process. Swap EK-8749 and check against the acceptance figure in this chapter, then repeat the measurement after fifty operating hours. Allow two hours. Expect a line stop.",
+  "electrical",
+  "Earth bond high impedance",
+  "SM-12.5-EK013",
+  4
+ ],
+ [
+  "When turret clamp slippage appears, the reading falls below 91 Nm before any other symptom shows. Treat it as an upstream supply problem rather than the turret clamp itself. Change MK-9549 as a set; matched pairs must not be mixed with used items. Do not defeat the interlock to gain access. Allow fifteen minutes.",
+  "mechanical",
+  "Turret clamp slippage",
+  "SM-13.2-MK019",
+  2
+ ],
+ [
+  "On the insulation panel, degradation presents as a reading that rises above 4 mm/s RMS. It is normal service wear reaching its limit. Change TK-9912 as a set; matched pairs must not be mixed with used items, then log the new reading in the machine book. Allow half a shift.",
+  "thermal",
+  "Insulation panel degradation",
+  "SM-11.9-TK008",
+  2
+ ],
+ [
+  "On the safety PLC, diagnostic fault presents as a reading that exceeds 235 ms. It is a fastening that has relaxed under thermal cycling. Change SK-2915 as a set; matched pairs must not be mixed with used items, then repeat the measurement after fifty operating hours. Wear eye protection: the assembly is under spring load. Allow two hours.",
+  "safety",
+  "Safety plc diagnostic fault",
+  "SM-11.7-SK006",
+  2
+ ],
+ [
+  "Hot runner zone imbalance is confirmed when the measured value falls below 59 bar. The usual cause is a fastening that has relaxed under thermal cycling. Replace hot runner using kit TK-5914, then check the trend again on the next shift. Isolate and lock off before removing any cover. Allow thirty minutes.",
+  "thermal",
+  "Hot runner zone imbalance",
+  "SM-12.1-TK009",
+  2
+ ],
+ [
+  "On the line reactor, saturation presents as a reading that exceeds 27 A. It is a fastening that has relaxed under thermal cycling. Change EK-6806 as a set; matched pairs must not be mixed with used items, then log the new reading in the machine book. Allow half a shift.",
+  "electrical",
+  "Line reactor saturation",
+  "SM-12.6-EK014",
+  2
+ ],
+ [
+  "Cooling fan bearing failure is confirmed when the measured value rises above 6 mm/s RMS. The usual cause is fatigue at the mounting rather than the cooling fan body. Swap TK-1263 and check against the acceptance figure in this chapter, then check the trend again on the next shift. Hot surfaces remain above 60 degrees C for some time after stopping. Allow two hours.",
+  "thermal",
+  "Cooling fan bearing failure",
+  "SM-12.2-TK010",
+  2
+ ],
+ [
+  "On the bearing housing, looseness presents as a reading that rises above 5 mm/s RMS. It is fatigue at the mounting rather than the bearing housing body. Fit replacement MK-8600 and re-run the commissioning check, then check the trend again on the next shift. Hot surfaces remain above 60 degrees C for some time after stopping. Allow forty five minutes.",
+  "mechanical",
+  "Bearing housing looseness",
+  "SM-13.3-MK020",
+  2
+ ],
+ [
+  "Pallet changer seating error is confirmed when the measured value exceeds 0.65 mm. The usual cause is a worn pallet changer rather than the control system. Change MK-7620 as a set; matched pairs must not be mixed with used items, then check the trend again on the next shift. Stored energy remains after shutdown; prove dead before starting. Allow forty five minutes.",
+  "mechanical",
+  "Pallet changer seating error",
+  "SM-13.4-MK021",
+  3
+ ],
+ [
+  "On the pressure mat, dead zone presents as a reading that exceeds 0.75 mm. It is misalignment introduced at the last rebuild. Renew SK-8889 and re-datum before returning the asset to production, then confirm the figure has returned inside tolerance. Stored energy remains after shutdown; prove dead before starting. Allow fifteen minutes.",
+  "safety",
+  "Pressure mat dead zone",
+  "SM-11.8-SK007",
+  1
+ ],
+ [
+  "On the pressure relief valve, chatter presents as a reading that falls below 210 bar. It is a fastening that has relaxed under thermal cycling. Install HK-1032, then leave the machine on a dry cycle before loading it, then check the trend again on the next shift. Allow ninety minutes.",
+  "hydraulic",
+  "Pressure relief valve chatter",
+  "SM-12.6-HK014",
+  2
+ ],
+ [
+  "Radiator core blockage is confirmed when the measured value drops under 57 l/min. The usual cause is a worn radiator core rather than the control system. Install TK-1663, then leave the machine on a dry cycle before loading it, then log the new reading in the machine book. Hot surfaces remain above 60 degrees C for some time after stopping. Allow twenty minutes.",
+  "thermal",
+  "Radiator core blockage",
+  "SM-12.3-TK011",
+  3
+ ],
+ [
+  "When silencer clogging appears, the reading drops under 7 l/min before any other symptom shows. Treat it as a worn silencer rather than the control system. Install PK-3496, then leave the machine on a dry cycle before loading it. Wear eye protection: the assembly is under spring load. Allow fifteen minutes.",
+  "pneumatic",
+  "Silencer clogging",
+  "SM-12.2-PK010",
+  2
+ ],
+ [
+  "On the rope pull switch, tension loss presents as a reading that falls below 141 Nm. It is a fastening that has relaxed under thermal cycling. Replace rope pull switch using kit SK-9799, then log the new reading in the machine book. Stored energy remains after shutdown; prove dead before starting. Allow half a shift.",
+  "safety",
+  "Rope pull switch tension loss",
+  "SM-11.9-SK008",
+  3
+ ],
+ [
+  "On the chuck jaws, grip loss presents as a reading that falls below 95 Nm. It is contamination tracking in from the surrounding process. Renew MK-5692 and re-datum before returning the asset to production, then repeat the measurement after fifty operating hours. Wear eye protection: the assembly is under spring load. Allow half a shift.",
+  "mechanical",
+  "Chuck jaws grip loss",
+  "SM-13.5-MK022",
+  1
+ ],
+ [
+  "Tailstock alignment is confirmed when the measured value exceeds 0.68 mm. The usual cause is an upstream supply problem rather than the tailstock itself. Install MK-9343, then leave the machine on a dry cycle before loading it, then confirm the figure has returned inside tolerance. Do not defeat the interlock to gain access. Allow ninety minutes.",
+  "mechanical",
+  "Tailstock alignment",
+  "SM-13.6-MK023",
+  2
+ ],
+ [
+  "On the air receiver, condensate build-up presents as a reading that drops under 15 l/min. It is contamination tracking in from the surrounding process. Renew PK-1716 and re-datum before returning the asset to production, then log the new reading in the machine book. Do not defeat the interlock to gain access. Allow thirty minutes.",
+  "pneumatic",
+  "Air receiver condensate build-up",
+  "SM-12.3-PK011",
+  2
+ ],
+ [
+  "When air cylinder cushion loss appears, the reading drops under 53 l/min before any other symptom shows. Treat it as a worn air cylinder rather than the control system. Swap PK-4595 and check against the acceptance figure in this chapter. Do not defeat the interlock to gain access. Allow seventy minutes.",
+  "pneumatic",
+  "Air cylinder cushion loss",
+  "SM-12.4-PK012",
+  2
+ ],
+ [
+  "Pilot line restriction is confirmed when the measured value drops under 42 l/min. The usual cause is a fastening that has relaxed under thermal cycling. Renew HK-4601 and re-datum before returning the asset to production, then confirm the figure has returned inside tolerance. Wear eye protection: the assembly is under spring load. Allow two hours.",
+  "hydraulic",
+  "Pilot line restriction",
+  "SM-12.7-HK015",
+  3
+ ],
+ [
+  "When cabinet air conditioner icing appears, the reading falls below -9 degrees C before any other symptom shows. Treat it as fatigue at the mounting rather than the cabinet air conditioner body. Change TK-4109 as a set; matched pairs must not be mixed with used items. Stored energy remains after shutdown; prove dead before starting. Allow forty five minutes.",
+  "thermal",
+  "Cabinet air conditioner icing",
+  "SM-12.4-TK012",
+  2
+ ],
+ [
+  "When motor bearing electrical erosion appears, the reading exceeds 127 A before any other symptom shows. Treat it as normal service wear reaching its limit. Fit replacement EK-7808 and re-run the commissioning check. Two people are required for this lift. Allow two hours.",
+  "electrical",
+  "Motor bearing electrical erosion",
+  "SM-12.7-EK015",
+  3
+ ],
+ [
+  "When case drain excess flow appears, the reading exceeds 55 ml/min before any other symptom shows. Treat it as a fastening that has relaxed under thermal cycling. Swap HK-6710 and check against the acceptance figure in this chapter. Hot surfaces remain above 60 degrees C for some time after stopping. Allow thirty minutes.",
+  "hydraulic",
+  "Case drain excess flow",
+  "SM-12.8-HK016",
+  1
+ ],
+ [
+  "On the spindle taper, fretting presents as a reading that exceeds 0.88 mm. It is an upstream supply problem rather than the spindle taper itself. Renew MK-6289 and re-datum before returning the asset to production, then log the new reading in the machine book. Two people are required for this lift. Allow an hour.",
+  "mechanical",
+  "Spindle taper fretting",
+  "SM-13.7-MK024",
+  2
+ ],
+ [
+  "Relay contact bounce is confirmed when the measured value exceeds 281 mV. The usual cause is contamination tracking in from the surrounding process. Swap EK-7557 and check against the acceptance figure in this chapter, then log the new reading in the machine book. Stored energy remains after shutdown; prove dead before starting. Allow two hours.",
+  "electrical",
+  "Relay contact bounce",
+  "SM-12.8-EK016",
+  3
+ ],
+ [
+  "On the PSU, output droop presents as a reading that exceeds 49 A. It is a worn PSU rather than the control system. Replace PSU using kit EK-8923, then check the trend again on the next shift. Hot surfaces remain above 60 degrees C for some time after stopping. Allow seventy minutes.",
+  "electrical",
+  "Psu output droop",
+  "SM-12.9-EK017",
+  2
+ ],
+ [
+  "Vfd DC bus ripple is confirmed when the measured value exceeds 175 A. The usual cause is a worn VFD rather than the control system. Replace VFD using kit EK-7228, then log the new reading in the machine book. Hot surfaces remain above 60 degrees C for some time after stopping. Allow thirty minutes. Expect a line stop.",
+  "electrical",
+  "Vfd DC bus ripple",
+  "SM-13.1-EK018",
+  4
+ ],
+ [
+  "Chain drive elongation is confirmed when the measured value exceeds 0.8 mm. The usual cause is fatigue at the mounting rather than the chain drive body. Replace chain drive using kit MK-2043, then check the trend again on the next shift. Wear eye protection: the assembly is under spring load. Allow ninety minutes.",
+  "mechanical",
+  "Chain drive elongation",
+  "SM-13.8-MK025",
+  1
+ ],
+ [
+  "On the clamp cylinder, creep presents as a reading that falls below 136 Nm. It is a setting that has drifted since commissioning. Replace clamp cylinder using kit MK-6482, then log the new reading in the machine book. Do not defeat the interlock to gain access. Allow fifteen minutes. Expect a line stop.",
+  "mechanical",
+  "Clamp cylinder creep under load",
+  "SM-13.9-MK026",
+  4
+ ],
+ [
+  "On the fieldbus, CRC errors presents as a reading that exceeds 130 mV. It is fatigue at the mounting rather than the fieldbus body. Replace fieldbus using kit EK-5875, then confirm the figure has returned inside tolerance. Allow forty minutes.",
+  "electrical",
+  "Fieldbus CRC errors under load",
+  "SM-13.2-EK019",
+  1
+ ],
+ [
+  "On the cylinder rod seal, weep presents as a reading that exceeds 85 ml/min. It is normal service wear reaching its limit. Replace cylinder rod seal using kit HK-3390, then confirm the figure has returned inside tolerance. Isolate and lock off before removing any cover. Allow seventy minutes.",
+  "hydraulic",
+  "Cylinder rod seal weep under load",
+  "SM-12.9-HK017",
+  2
+ ],
+ [
+  "On the hydraulic hose, abrasion presents as a reading that falls below 92 bar. It is misalignment introduced at the last rebuild. Change HK-1418 as a set; matched pairs must not be mixed with used items, then repeat the measurement after fifty operating hours. Hot surfaces remain above 60 degrees C for some time after stopping. Allow seventy minutes.",
+  "hydraulic",
+  "Hydraulic hose abrasion under load",
+  "SM-13.1-HK018",
+  3
+ ],
+ [
+  "When proportional valve hysteresis appears, the reading falls below 61 bar before any other symptom shows. Treat it as an upstream supply problem rather than the proportional valve itself. Replace proportional valve using kit HK-4023. Allow twenty five minutes.",
+  "hydraulic",
+  "Proportional valve hysteresis under load",
+  "SM-13.2-HK019",
+  2
+ ],
+ [
+  "On the resolver, phase error presents as a reading that exceeds 31 mV. It is misalignment introduced at the last rebuild. Install EK-7113, then leave the machine on a dry cycle before loading it, then confirm the figure has returned inside tolerance. Stored energy remains after shutdown; prove dead before starting. Allow seventy minutes.",
+  "electrical",
+  "Resolver phase error under load",
+  "SM-13.3-EK020",
+  1
+ ],
+ [
+  "On the contactor, welded contacts presents as a reading that exceeds 229 mV. It is contamination tracking in from the surrounding process. Fit replacement EK-8916 and re-run the commissioning check, then check the trend again on the next shift. Allow forty minutes.",
+  "electrical",
+  "Contactor welded contacts under load",
+  "SM-13.4-EK021",
+  3
+ ],
+ [
+  "When process water loop temperature swing appears, the reading climbs past 114 degrees C before any other symptom shows. Treat it as a fastening that has relaxed under thermal cycling. Replace process water loop using kit TK-4983. Allow forty five minutes.",
+  "thermal",
+  "Process water loop temperature swing under load",
+  "SM-12.5-TK013",
+  3
+ ],
+ [
+  "On the suction strainer, blockage presents as a reading that drops under 89 l/min. It is contamination tracking in from the surrounding process. Install HK-2496, then leave the machine on a dry cycle before loading it, then confirm the figure has returned inside tolerance. Wear eye protection: the assembly is under spring load. Allow twenty five minutes.",
+  "hydraulic",
+  "Suction strainer blockage under load",
+  "SM-13.3-HK020",
+  2
+ ],
+ [
+  "On the palletiser arm, overshoot presents as a reading that exceeds 0.76 mm. It is a fastening that has relaxed under thermal cycling. Install MK-3618, then leave the machine on a dry cycle before loading it, then repeat the measurement after fifty operating hours. Do not defeat the interlock to gain access. Allow twenty minutes.",
+  "mechanical",
+  "Palletiser arm overshoot under load",
+  "SM-14.1-MK027",
+  2
+ ],
+ [
+  "When brake resistor overheating appears, the reading climbs past 148 degrees C before any other symptom shows. Treat it as a setting that has drifted since commissioning. Swap EK-5709 and check against the acceptance figure in this chapter. Stored energy remains after shutdown; prove dead before starting. Allow forty five minutes.",
+  "electrical",
+  "Brake resistor overheating under load",
+  "SM-13.5-EK022",
+  2
+ ],
+ [
+  "On the vibration damper, degradation presents as a reading that rises above 9 mm/s RMS. It is normal service wear reaching its limit. Install MK-6866, then leave the machine on a dry cycle before loading it, then log the new reading in the machine book. Wear eye protection: the assembly is under spring load. Allow half a shift.",
+  "mechanical",
+  "Vibration damper degradation under load",
+  "SM-14.2-MK028",
+  1
+ ],
+ [
+  "When motor winding insulation degradation appears, the reading rises above 5 mm/s RMS before any other symptom shows. Treat it as an upstream supply problem rather than the motor winding itself. Swap EK-5965 and check against the acceptance figure in this chapter. Stored energy remains after shutdown; prove dead before starting. Allow thirty minutes. Expect a line stop.",
+  "electrical",
+  "Motor winding insulation degradation under load",
+  "SM-13.6-EK023",
+  4
+ ],
+ [
+  "On the gearbox, oil leak presents as a reading that exceeds 17 ml/min. It is misalignment introduced at the last rebuild. Swap MK-1083 and check against the acceptance figure in this chapter, then confirm the figure has returned inside tolerance. Stored energy remains after shutdown; prove dead before starting. Allow forty minutes.",
+  "mechanical",
+  "Gearbox oil leak under load",
+  "SM-14.3-MK029",
+  3
+ ],
+ [
+  "On the check valve, leak-back presents as a reading that exceeds 47 ml/min. It is a fastening that has relaxed under thermal cycling. Swap HK-8786 and check against the acceptance figure in this chapter, then check the trend again on the next shift. Wear eye protection: the assembly is under spring load. Allow two hours.",
+  "hydraulic",
+  "Check valve leak-back under load",
+  "SM-13.4-HK021",
+  2
+ ],
+ [
+  "On the quench tank, temperature rise presents as a reading that climbs past 100 degrees C. It is a worn quench tank rather than the control system. Fit replacement TK-1548 and re-run the commissioning check, then log the new reading in the machine book. Hot surfaces remain above 60 degrees C for some time after stopping. Allow two hours.",
+  "thermal",
+  "Quench tank temperature rise under load",
+  "SM-12.6-TK014",
+  3
+ ],
+ [
+  "Hydraulic cooler fouling is confirmed when the measured value drops under 3 l/min. The usual cause is a worn hydraulic cooler rather than the control system. Replace hydraulic cooler using kit HK-7411, then check the trend again on the next shift. Stored energy remains after shutdown; prove dead before starting. Allow twenty five minutes.",
+  "hydraulic",
+  "Hydraulic cooler fouling under load",
+  "SM-13.5-HK022",
+  1
+ ],
+ [
+  "On the heat exchanger, scaling presents as a reading that drops under 77 l/min. It is a setting that has drifted since commissioning. Renew TK-5029 and re-datum before returning the asset to production, then repeat the measurement after fifty operating hours. Stored energy remains after shutdown; prove dead before starting. Allow half a shift.",
+  "thermal",
+  "Heat exchanger scaling under load",
+  "SM-12.7-TK015",
+  1
+ ],
+ [
+  "On the flow divider, imbalance presents as a reading that falls below 179 bar. It is misalignment introduced at the last rebuild. Replace flow divider using kit HK-4525, then repeat the measurement after fifty operating hours. Hot surfaces remain above 60 degrees C for some time after stopping. Allow ninety minutes.",
+  "hydraulic",
+  "Flow divider imbalance under load",
+  "SM-13.6-HK023",
+  1
+ ],
+ [
+  "Directional valve sticking is confirmed when the measured value falls below 213 bar. The usual cause is normal service wear reaching its limit. Install HK-6761, then leave the machine on a dry cycle before loading it, then confirm the figure has returned inside tolerance. Stored energy remains after shutdown; prove dead before starting. Allow half a shift.",
+  "hydraulic",
+  "Directional valve sticking under load",
+  "SM-13.7-HK024",
+  2
+ ],
+ [
+  "On the two-hand control, asynchrony presents as a reading that exceeds 81 ms. It is normal service wear reaching its limit. Fit replacement SK-6944 and re-run the commissioning check, then log the new reading in the machine book. Stored energy remains after shutdown; prove dead before starting. Allow fifteen minutes.",
+  "safety",
+  "Two-hand control asynchrony under load",
+  "SM-12.1-SK009",
+  2
+ ],
+ [
+  "On the cable gland, ingress presents as a reading that falls below 7.11 megohm. It is normal service wear reaching its limit. Replace cable gland using kit EK-1655, then check the trend again on the next shift. Wear eye protection: the assembly is under spring load. Allow an hour.",
+  "electrical",
+  "Cable gland ingress under load",
+  "SM-13.7-EK024",
+  3
+ ],
+ [
+  "When reservoir aeration appears, the reading drops under 26 l/min before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Fit replacement HK-4454 and re-run the commissioning check. Allow ninety minutes.",
+  "hydraulic",
+  "Reservoir aeration under load",
+  "SM-13.8-HK025",
+  1
+ ],
+ [
+  "Slideway scoring is confirmed when the measured value exceeds 0.64 mm. The usual cause is fatigue at the mounting rather than the slideway body. Renew MK-8599 and re-datum before returning the asset to production, then check the trend again on the next shift. Do not defeat the interlock to gain access. Allow twenty five minutes.",
+  "mechanical",
+  "Slideway scoring under load",
+  "SM-14.4-MK030",
+  3
+ ],
+ [
+  "Robot gripper grip loss is confirmed when the measured value falls below 28 Nm. The usual cause is an upstream supply problem rather than the robot gripper itself. Renew MK-6440 and re-datum before returning the asset to production, then log the new reading in the machine book. Do not defeat the interlock to gain access. Allow forty minutes.",
+  "mechanical",
+  "Robot gripper grip loss under load",
+  "SM-14.5-MK031",
+  3
+ ],
+ [
+  "When air dryer dew point rise appears, the reading climbs past 184 degrees C before any other symptom shows. Treat it as a setting that has drifted since commissioning. Install PK-8495, then leave the machine on a dry cycle before loading it. Hot surfaces remain above 60 degrees C for some time after stopping. Allow fifteen minutes.",
+  "pneumatic",
+  "Air dryer dew point rise under load",
+  "SM-12.5-PK013",
+  2
+ ],
+ [
+  "When manifold gasket leak appears, the reading exceeds 89 ml/min before any other symptom shows. Treat it as contamination tracking in from the surrounding process. Replace manifold gasket using kit PK-7489. Hot surfaces remain above 60 degrees C for some time after stopping. Allow forty minutes.",
+  "pneumatic",
+  "Manifold gasket leak under load",
+  "SM-12.6-PK014",
+  1
+ ],
+ [
+  "On the pump coupling, wear presents as a reading that exceeds 0.76 mm. It is normal service wear reaching its limit. Change HK-7154 as a set; matched pairs must not be mixed with used items, then confirm the figure has returned inside tolerance. Hot surfaces remain above 60 degrees C for some time after stopping. Allow twenty five minutes.",
+  "hydraulic",
+  "Pump coupling wear under load",
+  "SM-13.9-HK026",
+  2
+ ],
+ [
+  "Solenoid valve slow shift is confirmed when the measured value exceeds 183 ms. The usual cause is a setting that has drifted since commissioning. Renew PK-1701 and re-datum before returning the asset to production, then check the trend again on the next shift. Allow forty minutes.",
+  "pneumatic",
+  "Solenoid valve slow shift under load",
+  "SM-12.7-PK015",
+  1
+ ],
+ [
+  "Turntable bearing roughness is confirmed when the measured value rises above 3 mm/s RMS. The usual cause is fatigue at the mounting rather than the turntable bearing body. Change MK-2404 as a set; matched pairs must not be mixed with used items, then check the trend again on the next shift. Allow seventy minutes.",
+  "mechanical",
+  "Turntable bearing roughness under load",
+  "SM-14.6-MK032",
+  2
+ ],
+ [
+  "On the busbar, hot joint presents as a reading that exceeds 44 A. It is a setting that has drifted since commissioning. Renew EK-6216 and re-datum before returning the asset to production, then log the new reading in the machine book. Do not defeat the interlock to gain access. Allow twenty minutes.",
+  "electrical",
+  "Busbar hot joint under load",
+  "SM-13.8-EK025",
+  2
+ ],
+ [
+  "On the accumulator, precharge loss presents as a reading that falls below 54 bar. It is normal service wear reaching its limit. Install HK-2055, then leave the machine on a dry cycle before loading it, then log the new reading in the machine book. Allow two hours.",
+  "hydraulic",
+  "Accumulator precharge loss under load",
+  "SM-14.1-HK027",
+  1
+ ],
+ [
+  "When oven element open circuit appears, the reading exceeds 89.7 megohm before any other symptom shows. Treat it as fatigue at the mounting rather than the oven element body. Renew TK-8206 and re-datum before returning the asset to production. Wear eye protection: the assembly is under spring load. Allow thirty minutes.",
+  "thermal",
+  "Oven element open circuit under load",
+  "SM-12.8-TK016",
+  2
+ ],
+ [
+  "On the indexer, overshoot presents as a reading that exceeds 0.15 mm. It is a fastening that has relaxed under thermal cycling. Change MK-7931 as a set; matched pairs must not be mixed with used items, then confirm the figure has returned inside tolerance. Wear eye protection: the assembly is under spring load. Allow fifteen minutes.",
+  "mechanical",
+  "Indexer overshoot under load",
+  "SM-14.7-MK033",
+  2
+ ],
+ [
+  "When flexible coupling misalignment appears, the reading exceeds 0.56 mm before any other symptom shows. Treat it as a fastening that has relaxed under thermal cycling. Fit replacement MK-1682 and re-run the commissioning check. Stored energy remains after shutdown; prove dead before starting. Allow forty five minutes.",
+  "mechanical",
+  "Flexible coupling misalignment under load",
+  "SM-14.8-MK034",
+  1
+ ],
+ [
+  "When proximity sensor intermittent output appears, the reading exceeds 203 mV before any other symptom shows. Treat it as a worn proximity sensor rather than the control system. Renew EK-9461 and re-datum before returning the asset to production. Isolate and lock off before removing any cover. Allow forty five minutes.",
+  "electrical",
+  "Proximity sensor intermittent output under load",
+  "SM-13.9-EK026",
+  3
+ ],
+ [
+  "On the blow-off nozzle, misdirection presents as a reading that falls below 7 bar. It is fatigue at the mounting rather than the blow-off nozzle body. Renew PK-5580 and re-datum before returning the asset to production, then check the trend again on the next shift. Isolate and lock off before removing any cover. Allow half a shift.",
+  "pneumatic",
+  "Blow-off nozzle misdirection under load",
+  "SM-12.8-PK016",
+  1
+ ],
+ [
+  "On the spindle cooler, flow restriction presents as a reading that drops under 64 l/min. It is fatigue at the mounting rather than the spindle cooler body. Change TK-4135 as a set; matched pairs must not be mixed with used items, then confirm the figure has returned inside tolerance. Allow forty minutes.",
+  "thermal",
+  "Spindle cooler flow restriction under load",
+  "SM-12.9-TK017",
+  2
+ ],
+ [
+  "On the shielding, ground loop presents as a reading that exceeds 352 mV. It is a setting that has drifted since commissioning. Swap EK-9442 and check against the acceptance figure in this chapter, then confirm the figure has returned inside tolerance. Stored energy remains after shutdown; prove dead before starting. Allow twenty minutes.",
+  "electrical",
+  "Shielding ground loop under load",
+  "SM-14.1-EK027",
+  3
+ ],
+ [
+  "On the way covers, wear presents as a reading that exceeds 0.22 mm. It is fatigue at the mounting rather than the way covers body. Fit replacement MK-5802 and re-run the commissioning check, then log the new reading in the machine book. Isolate and lock off before removing any cover. Allow thirty minutes.",
+  "mechanical",
+  "Way covers wear under load",
+  "SM-14.9-MK035",
+  2
+ ],
+ [
+  "On the regulator, creep presents as a reading that falls below 94 Nm. It is a worn regulator rather than the control system. Renew PK-9077 and re-datum before returning the asset to production, then confirm the figure has returned inside tolerance. Wear eye protection: the assembly is under spring load. Allow twenty five minutes.",
+  "pneumatic",
+  "Regulator creep under load",
+  "SM-12.9-PK017",
+  3
+ ],
+ [
+  "On the induction coil, cooling loss presents as a reading that climbs past 119 degrees C. It is fatigue at the mounting rather than the induction coil body. Renew TK-1942 and re-datum before returning the asset to production, then confirm the figure has returned inside tolerance. Do not defeat the interlock to gain access. Allow an hour.",
+  "thermal",
+  "Induction coil cooling loss under load",
+  "SM-13.1-TK018",
+  1
+ ],
+ [
+  "On the ballscrew, backlash presents as a reading that exceeds 0.42 mm. It is contamination tracking in from the surrounding process. Fit replacement MK-1853 and re-run the commissioning check, then log the new reading in the machine book. Two people are required for this lift. Allow fifteen minutes.",
+  "mechanical",
+  "Ballscrew backlash under load",
+  "SM-15.1-MK036",
+  2
+ ],
+ [
+  "On the PLC input card, channel failure presents as a reading that exceeds 322 mV. It is misalignment introduced at the last rebuild. Replace PLC input card using kit EK-4896, then log the new reading in the machine book. Stored energy remains after shutdown; prove dead before starting. Allow forty minutes.",
+  "electrical",
+  "Plc input card channel failure under load",
+  "SM-14.2-EK028",
+  2
+ ],
+ [
+  "When light curtain muting fault appears, the reading exceeds 244 ms before any other symptom shows. Treat it as fatigue at the mounting rather than the light curtain body. Replace light curtain using kit SK-4221. Allow fifteen minutes.",
+  "safety",
+  "Light curtain muting fault under load",
+  "SM-12.2-SK010",
+  1
+ ],
+ [
+  "When thermocouple drift appears, the reading falls below 54 Nm before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Swap TK-6026 and check against the acceptance figure in this chapter. Two people are required for this lift. Allow twenty minutes.",
+  "thermal",
+  "Thermocouple drift under load",
+  "SM-13.2-TK019",
+  2
+ ],
+ [
+  "When counterbalance drift appears, the reading falls below 84 Nm before any other symptom shows. Treat it as a setting that has drifted since commissioning. Fit replacement MK-5488 and re-run the commissioning check. Wear eye protection: the assembly is under spring load. Allow twenty minutes.",
+  "mechanical",
+  "Counterbalance drift under load",
+  "SM-15.2-MK037",
+  2
+ ],
+ [
+  "Drive coupling backlash is confirmed when the measured value exceeds 0.5 mm. The usual cause is an upstream supply problem rather than the drive coupling itself. Swap MK-2462 and check against the acceptance figure in this chapter, then log the new reading in the machine book. Allow ninety minutes.",
+  "mechanical",
+  "Drive coupling backlash under load",
+  "SM-15.3-MK038",
+  2
+ ],
+ [
+  "On the cam follower, flat spotting presents as a reading that rises above 5 mm/s RMS. It is contamination tracking in from the surrounding process. Change MK-8013 as a set; matched pairs must not be mixed with used items, then repeat the measurement after fifty operating hours. Stored energy remains after shutdown; prove dead before starting. Allow fifteen minutes.",
+  "mechanical",
+  "Cam follower flat spotting under load",
+  "SM-15.4-MK039",
+  3
+ ],
+ [
+  "On the timing belt, tooth wear presents as a reading that exceeds 0.21 mm. It is an upstream supply problem rather than the timing belt itself. Change MK-6441 as a set; matched pairs must not be mixed with used items, then confirm the figure has returned inside tolerance. Do not defeat the interlock to gain access. Allow two hours.",
+  "mechanical",
+  "Timing belt tooth wear under load",
+  "SM-15.5-MK040",
+  2
+ ],
+ [
+  "On the vacuum generator, loss of vacuum presents as a reading that drops under 3 l/min. It is a fastening that has relaxed under thermal cycling. Swap PK-4085 and check against the acceptance figure in this chapter, then repeat the measurement after fifty operating hours. Hot surfaces remain above 60 degrees C for some time after stopping. Allow an hour.",
+  "pneumatic",
+  "Vacuum generator loss of vacuum under load",
+  "SM-13.1-PK018",
+  3
+ ],
+ [
+  "Safety relay cross fault is confirmed when the measured value exceeds 372 ms. The usual cause is normal service wear reaching its limit. Fit replacement SK-8892 and re-run the commissioning check, then confirm the figure has returned inside tolerance. Hot surfaces remain above 60 degrees C for some time after stopping. Allow half a shift.",
+  "safety",
+  "Safety relay cross fault under load",
+  "SM-12.3-SK011",
+  2
+ ],
+ [
+  "Door lock solenoid sticking is confirmed when the measured value falls below 41 bar. The usual cause is a fastening that has relaxed under thermal cycling. Replace door lock solenoid using kit SK-3388, then log the new reading in the machine book. Hot surfaces remain above 60 degrees C for some time after stopping. Allow forty five minutes.",
+  "safety",
+  "Door lock solenoid sticking under load",
+  "SM-12.4-SK012",
+  2
+ ],
+ [
+  "On the shaft seal, weep presents as a reading that exceeds 86 ml/min. It is contamination tracking in from the surrounding process. Renew MK-3842 and re-datum before returning the asset to production, then check the trend again on the next shift. Hot surfaces remain above 60 degrees C for some time after stopping. Allow fifteen minutes. Expect a line stop.",
+  "mechanical",
+  "Shaft seal weep under load",
+  "SM-15.6-MK041",
+  4
+ ],
+ [
+  "On the pressure switch, setpoint drift presents as a reading that falls below 119 Nm. It is a worn pressure switch rather than the control system. Swap PK-9649 and check against the acceptance figure in this chapter, then log the new reading in the machine book. Do not defeat the interlock to gain access. Allow two hours.",
+  "pneumatic",
+  "Pressure switch setpoint drift under load",
+  "SM-13.2-PK019",
+  1
+ ],
+ [
+  "When FRL unit bowl contamination appears, the reading drops under 16 l/min before any other symptom shows. Treat it as fatigue at the mounting rather than the FRL unit body. Swap PK-6426 and check against the acceptance figure in this chapter. Two people are required for this lift. Allow twenty minutes.",
+  "pneumatic",
+  "Frl unit bowl contamination under load",
+  "SM-13.3-PK020",
+  1
+ ],
+ [
+  "When return filter bypass appears, the reading exceeds 34 ml/min before any other symptom shows. Treat it as a setting that has drifted since commissioning. Renew HK-7437 and re-datum before returning the asset to production. Do not defeat the interlock to gain access. Allow an hour.",
+  "hydraulic",
+  "Return filter bypass under load",
+  "SM-14.2-HK028",
+  1
+ ],
+ [
+  "Overtravel limit false trip is confirmed when the measured value exceeds 199 ms. The usual cause is a setting that has drifted since commissioning. Fit replacement SK-9534 and re-run the commissioning check, then check the trend again on the next shift. Stored energy remains after shutdown; prove dead before starting. Allow two hours.",
+  "safety",
+  "Overtravel limit false trip under load",
+  "SM-12.5-SK013",
+  1
+ ],
+ [
+  "On the quick exhaust valve, restriction presents as a reading that drops under 64 l/min. It is fatigue at the mounting rather than the quick exhaust valve body. Swap PK-2994 and check against the acceptance figure in this chapter, then repeat the measurement after fifty operating hours. Allow two hours.",
+  "pneumatic",
+  "Quick exhaust valve restriction under load",
+  "SM-13.4-PK021",
+  1
+ ],
+ [
+  "On the servo valve, null shift presents as a reading that falls below 190 bar. It is fatigue at the mounting rather than the servo valve body. Renew HK-6480 and re-datum before returning the asset to production, then confirm the figure has returned inside tolerance. Stored energy remains after shutdown; prove dead before starting. Allow thirty minutes.",
+  "hydraulic",
+  "Servo valve null shift under load",
+  "SM-14.3-HK029",
+  2
+ ],
+ [
+  "When EMC filter leakage appears, the reading exceeds 75 ml/min before any other symptom shows. Treat it as normal service wear reaching its limit. Replace EMC filter using kit EK-2074. Do not defeat the interlock to gain access. Allow forty minutes.",
+  "electrical",
+  "Emc filter leakage under load",
+  "SM-14.3-EK029",
+  2
+ ],
+ [
+  "On the rotary table, index error presents as a reading that exceeds 0.69 mm. It is a worn rotary table rather than the control system. Install MK-4247, then leave the machine on a dry cycle before loading it, then log the new reading in the machine book. Do not defeat the interlock to gain access. Allow seventy minutes.",
+  "mechanical",
+  "Rotary table index error under load",
+  "SM-15.7-MK042",
+  2
+ ],
+ [
+  "When terminal block loose connection appears, the reading exceeds 45 mV before any other symptom shows. Treat it as contamination tracking in from the surrounding process. Swap EK-9568 and check against the acceptance figure in this chapter. Wear eye protection: the assembly is under spring load. Allow twenty five minutes.",
+  "electrical",
+  "Terminal block loose connection under load",
+  "SM-14.4-EK030",
+  3
+ ],
+ [
+  "When roller bearing pitting appears, the reading rises above 6 mm/s RMS before any other symptom shows. Treat it as a setting that has drifted since commissioning. Fit replacement MK-6075 and re-run the commissioning check. Do not defeat the interlock to gain access. Allow twenty five minutes.",
+  "mechanical",
+  "Roller bearing pitting under load",
+  "SM-15.8-MK043",
+  2
+ ],
+ [
+  "When earth bond high impedance appears, the reading falls below 58.16 megohm before any other symptom shows. Treat it as a setting that has drifted since commissioning. Fit replacement EK-5177 and re-run the commissioning check. Stored energy remains after shutdown; prove dead before starting. Allow seventy minutes.",
+  "electrical",
+  "Earth bond high impedance under load",
+  "SM-14.5-EK031",
+  2
+ ],
+ [
+  "When turret clamp slippage appears, the reading falls below 43 Nm before any other symptom shows. Treat it as an upstream supply problem rather than the turret clamp itself. Swap MK-8617 and check against the acceptance figure in this chapter. Allow fifteen minutes.",
+  "mechanical",
+  "Turret clamp slippage under load",
+  "SM-15.9-MK044",
+  2
+ ],
+ [
+  "On the insulation panel, degradation presents as a reading that rises above 7 mm/s RMS. It is contamination tracking in from the surrounding process. Renew TK-4640 and re-datum before returning the asset to production, then check the trend again on the next shift. Isolate and lock off before removing any cover. Allow forty five minutes.",
+  "thermal",
+  "Insulation panel degradation under load",
+  "SM-13.3-TK020",
+  2
+ ],
+ [
+  "On the safety PLC, diagnostic fault presents as a reading that exceeds 234 ms. It is a fastening that has relaxed under thermal cycling. Fit replacement SK-5844 and re-run the commissioning check, then confirm the figure has returned inside tolerance. Do not defeat the interlock to gain access. Allow seventy minutes.",
+  "safety",
+  "Safety plc diagnostic fault under load",
+  "SM-12.6-SK014",
+  3
+ ],
+ [
+  "Hot runner zone imbalance is confirmed when the measured value falls below 118 bar. The usual cause is a worn hot runner rather than the control system. Replace hot runner using kit TK-5816, then log the new reading in the machine book. Hot surfaces remain above 60 degrees C for some time after stopping. Allow seventy minutes.",
+  "thermal",
+  "Hot runner zone imbalance under load",
+  "SM-13.4-TK021",
+  2
+ ],
+ [
+  "When line reactor saturation appears, the reading exceeds 124 A before any other symptom shows. Treat it as normal service wear reaching its limit. Change EK-1396 as a set; matched pairs must not be mixed with used items. Allow seventy minutes.",
+  "electrical",
+  "Line reactor saturation under load",
+  "SM-14.6-EK032",
+  1
+ ],
+ [
+  "On the cooling fan, bearing failure presents as a reading that rises above 6 mm/s RMS. It is misalignment introduced at the last rebuild. Renew TK-9307 and re-datum before returning the asset to production, then log the new reading in the machine book. Stored energy remains after shutdown; prove dead before starting. Allow ninety minutes.",
+  "thermal",
+  "Cooling fan bearing failure under load",
+  "SM-13.5-TK022",
+  2
+ ],
+ [
+  "When bearing housing looseness appears, the reading rises above 5 mm/s RMS before any other symptom shows. Treat it as fatigue at the mounting rather than the bearing housing body. Fit replacement MK-8782 and re-run the commissioning check. Allow forty five minutes.",
+  "mechanical",
+  "Bearing housing looseness under load",
+  "SM-16.1-MK045",
+  3
+ ],
+ [
+  "When pallet changer seating error appears, the reading exceeds 0.68 mm before any other symptom shows. Treat it as a worn pallet changer rather than the control system. Replace pallet changer using kit MK-3520. Two people are required for this lift. Allow ninety minutes.",
+  "mechanical",
+  "Pallet changer seating error under load",
+  "SM-16.2-MK046",
+  1
+ ],
+ [
+  "When pressure mat dead zone appears, the reading exceeds 0.88 mm before any other symptom shows. Treat it as fatigue at the mounting rather than the pressure mat body. Replace pressure mat using kit SK-9483. Do not defeat the interlock to gain access. Allow twenty minutes.",
+  "safety",
+  "Pressure mat dead zone under load",
+  "SM-12.7-SK015",
+  3
+ ],
+ [
+  "When pressure relief valve chatter appears, the reading falls below 116 bar before any other symptom shows. Treat it as an upstream supply problem rather than the pressure relief valve itself. Replace pressure relief valve using kit HK-1152. Allow two hours.",
+  "hydraulic",
+  "Pressure relief valve chatter under load",
+  "SM-14.4-HK030",
+  3
+ ],
+ [
+  "When radiator core blockage appears, the reading drops under 29 l/min before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Replace radiator core using kit TK-1798. Hot surfaces remain above 60 degrees C for some time after stopping. Allow seventy minutes.",
+  "thermal",
+  "Radiator core blockage under load",
+  "SM-13.6-TK023",
+  2
+ ],
+ [
+  "When silencer clogging appears, the reading drops under 59 l/min before any other symptom shows. Treat it as a setting that has drifted since commissioning. Renew PK-7230 and re-datum before returning the asset to production. Allow fifteen minutes.",
+  "pneumatic",
+  "Silencer clogging under load",
+  "SM-13.5-PK022",
+  2
+ ],
+ [
+  "On the rope pull switch, tension loss presents as a reading that falls below 152 Nm. It is a setting that has drifted since commissioning. Swap SK-4410 and check against the acceptance figure in this chapter, then repeat the measurement after fifty operating hours. Allow twenty five minutes.",
+  "safety",
+  "Rope pull switch tension loss under load",
+  "SM-12.8-SK016",
+  2
+ ],
+ [
+  "When chuck jaws grip loss appears, the reading falls below 65 Nm before any other symptom shows. Treat it as an upstream supply problem rather than the chuck jaws itself. Swap MK-3915 and check against the acceptance figure in this chapter. Wear eye protection: the assembly is under spring load. Allow seventy minutes.",
+  "mechanical",
+  "Chuck jaws grip loss under load",
+  "SM-16.3-MK047",
+  1
+ ],
+ [
+  "On the tailstock, alignment presents as a reading that exceeds 0.89 mm. It is a setting that has drifted since commissioning. Fit replacement MK-7615 and re-run the commissioning check, then repeat the measurement after fifty operating hours. Allow an hour.",
+  "mechanical",
+  "Tailstock alignment under load",
+  "SM-16.4-MK048",
+  2
+ ],
+ [
+  "On the air receiver, condensate build-up presents as a reading that drops under 75 l/min. It is a worn air receiver rather than the control system. Fit replacement PK-1622 and re-run the commissioning check, then repeat the measurement after fifty operating hours. Hot surfaces remain above 60 degrees C for some time after stopping. Allow an hour.",
+  "pneumatic",
+  "Air receiver condensate build-up under load",
+  "SM-13.6-PK023",
+  2
+ ],
+ [
+  "On the air cylinder, cushion loss presents as a reading that drops under 81 l/min. It is a setting that has drifted since commissioning. Replace air cylinder using kit PK-1562, then repeat the measurement after fifty operating hours. Wear eye protection: the assembly is under spring load. Allow twenty minutes.",
+  "pneumatic",
+  "Air cylinder cushion loss under load",
+  "SM-13.7-PK024",
+  1
+ ],
+ [
+  "Pilot line restriction is confirmed when the measured value drops under 7 l/min. The usual cause is a worn pilot line rather than the control system. Replace pilot line using kit HK-3227, then check the trend again on the next shift. Allow forty minutes.",
+  "hydraulic",
+  "Pilot line restriction under load",
+  "SM-14.5-HK031",
+  2
+ ],
+ [
+  "When cabinet air conditioner icing appears, the reading falls below 0 degrees C before any other symptom shows. Treat it as fatigue at the mounting rather than the cabinet air conditioner body. Fit replacement TK-8458 and re-run the commissioning check. Allow thirty minutes.",
+  "thermal",
+  "Cabinet air conditioner icing under load",
+  "SM-13.7-TK024",
+  2
+ ],
+ [
+  "Motor bearing electrical erosion is confirmed when the measured value exceeds 119 A. The usual cause is a fastening that has relaxed under thermal cycling. Install EK-7750, then leave the machine on a dry cycle before loading it, then confirm the figure has returned inside tolerance. Allow thirty minutes.",
+  "electrical",
+  "Motor bearing electrical erosion under load",
+  "SM-14.7-EK033",
+  3
+ ],
+ [
+  "On the case drain, excess flow presents as a reading that exceeds 61 ml/min. It is a fastening that has relaxed under thermal cycling. Replace case drain using kit HK-1243, then repeat the measurement after fifty operating hours. Wear eye protection: the assembly is under spring load. Allow forty five minutes.",
+  "hydraulic",
+  "Case drain excess flow under load",
+  "SM-14.6-HK032",
+  3
+ ],
+ [
+  "Spindle taper fretting is confirmed when the measured value exceeds 0.14 mm. The usual cause is misalignment introduced at the last rebuild. Change MK-3509 as a set; matched pairs must not be mixed with used items, then repeat the measurement after fifty operating hours. Isolate and lock off before removing any cover. Allow seventy minutes.",
+  "mechanical",
+  "Spindle taper fretting under load",
+  "SM-16.5-MK049",
+  1
+ ],
+ [
+  "On the relay, contact bounce presents as a reading that exceeds 61 mV. It is an upstream supply problem rather than the relay itself. Change EK-6456 as a set; matched pairs must not be mixed with used items, then check the trend again on the next shift. Do not defeat the interlock to gain access. Allow forty minutes.",
+  "electrical",
+  "Relay contact bounce under load",
+  "SM-14.8-EK034",
+  2
+ ],
+ [
+  "When PSU output droop appears, the reading exceeds 122 A before any other symptom shows. Treat it as normal service wear reaching its limit. Renew EK-9900 and re-datum before returning the asset to production. Stored energy remains after shutdown; prove dead before starting. Allow an hour.",
+  "electrical",
+  "Psu output droop under load",
+  "SM-14.9-EK035",
+  1
+ ],
+ [
+  "Vfd DC bus ripple is confirmed when the measured value exceeds 127 A. The usual cause is contamination tracking in from the surrounding process. Install EK-8429, then leave the machine on a dry cycle before loading it, then check the trend again on the next shift. Allow fifteen minutes.",
+  "electrical",
+  "Vfd DC bus ripple under load",
+  "SM-15.1-EK036",
+  2
+ ],
+ [
+  "When chain drive elongation appears, the reading exceeds 0.04 mm before any other symptom shows. Treat it as a fastening that has relaxed under thermal cycling. Install MK-2048, then leave the machine on a dry cycle before loading it. Isolate and lock off before removing any cover. Allow twenty five minutes.",
+  "mechanical",
+  "Chain drive elongation under load",
+  "SM-16.6-MK050",
+  2
+ ],
+ [
+  "Clamp cylinder creep is confirmed when the measured value falls below 220 Nm. The usual cause is a fastening that has relaxed under thermal cycling. Renew MK-6187 and re-datum before returning the asset to production, then confirm the figure has returned inside tolerance. Do not defeat the interlock to gain access. Allow two hours.",
+  "mechanical",
+  "Clamp cylinder creep after a cold start",
+  "SM-16.7-MK051",
+  2
+ ],
+ [
+  "Fieldbus CRC errors is confirmed when the measured value exceeds 155 mV. The usual cause is contamination tracking in from the surrounding process. Replace fieldbus using kit EK-8345, then repeat the measurement after fifty operating hours. Stored energy remains after shutdown; prove dead before starting. Allow ninety minutes.",
+  "electrical",
+  "Fieldbus CRC errors after a cold start",
+  "SM-15.2-EK037",
+  1
+ ],
+ [
+  "On the cylinder rod seal, weep presents as a reading that exceeds 40 ml/min. It is a setting that has drifted since commissioning. Renew HK-8877 and re-datum before returning the asset to production, then check the trend again on the next shift. Wear eye protection: the assembly is under spring load. Allow fifteen minutes.",
+  "hydraulic",
+  "Cylinder rod seal weep after a cold start",
+  "SM-14.7-HK033",
+  3
+ ],
+ [
+  "When hydraulic hose abrasion appears, the reading falls below 63 bar before any other symptom shows. Treat it as normal service wear reaching its limit. Swap HK-7217 and check against the acceptance figure in this chapter. Two people are required for this lift. Allow half a shift. Expect a line stop.",
+  "hydraulic",
+  "Hydraulic hose abrasion after a cold start",
+  "SM-14.8-HK034",
+  4
+ ],
+ [
+  "When proportional valve hysteresis appears, the reading falls below 75 bar before any other symptom shows. Treat it as a fastening that has relaxed under thermal cycling. Replace proportional valve using kit HK-9534. Two people are required for this lift. Allow twenty five minutes. Expect a line stop.",
+  "hydraulic",
+  "Proportional valve hysteresis after a cold start",
+  "SM-14.9-HK035",
+  4
+ ],
+ [
+  "When resolver phase error appears, the reading exceeds 151 mV before any other symptom shows. Treat it as normal service wear reaching its limit. Install EK-3471, then leave the machine on a dry cycle before loading it. Allow forty five minutes.",
+  "electrical",
+  "Resolver phase error after a cold start",
+  "SM-15.3-EK038",
+  3
+ ],
+ [
+  "On the contactor, welded contacts presents as a reading that exceeds 334 mV. It is an upstream supply problem rather than the contactor itself. Renew EK-4894 and re-datum before returning the asset to production, then confirm the figure has returned inside tolerance. Wear eye protection: the assembly is under spring load. Allow twenty five minutes.",
+  "electrical",
+  "Contactor welded contacts after a cold start",
+  "SM-15.4-EK039",
+  2
+ ],
+ [
+  "On the process water loop, temperature swing presents as a reading that climbs past 89 degrees C. It is normal service wear reaching its limit. Install TK-3813, then leave the machine on a dry cycle before loading it, then repeat the measurement after fifty operating hours. Wear eye protection: the assembly is under spring load. Allow seventy minutes. Expect a line stop.",
+  "thermal",
+  "Process water loop temperature swing after a cold start",
+  "SM-13.8-TK025",
+  4
+ ],
+ [
+  "Suction strainer blockage is confirmed when the measured value drops under 38 l/min. The usual cause is contamination tracking in from the surrounding process. Change HK-9643 as a set; matched pairs must not be mixed with used items, then log the new reading in the machine book. Do not defeat the interlock to gain access. Allow seventy minutes.",
+  "hydraulic",
+  "Suction strainer blockage after a cold start",
+  "SM-15.1-HK036",
+  2
+ ],
+ [
+  "Palletiser arm overshoot is confirmed when the measured value exceeds 0.67 mm. The usual cause is an upstream supply problem rather than the palletiser arm itself. Change MK-9778 as a set; matched pairs must not be mixed with used items, then check the trend again on the next shift. Do not defeat the interlock to gain access. Allow ninety minutes.",
+  "mechanical",
+  "Palletiser arm overshoot after a cold start",
+  "SM-16.8-MK052",
+  1
+ ],
+ [
+  "On the brake resistor, overheating presents as a reading that climbs past 173 degrees C. It is a fastening that has relaxed under thermal cycling. Replace brake resistor using kit EK-2150, then confirm the figure has returned inside tolerance. Hot surfaces remain above 60 degrees C for some time after stopping. Allow half a shift. Expect a line stop.",
+  "electrical",
+  "Brake resistor overheating after a cold start",
+  "SM-15.5-EK040",
+  4
+ ],
+ [
+  "When vibration damper degradation appears, the reading rises above 6 mm/s RMS before any other symptom shows. Treat it as fatigue at the mounting rather than the vibration damper body. Fit replacement MK-9929 and re-run the commissioning check. Do not defeat the interlock to gain access. Allow thirty minutes.",
+  "mechanical",
+  "Vibration damper degradation after a cold start",
+  "SM-16.9-MK053",
+  2
+ ],
+ [
+  "On the motor winding, insulation degradation presents as a reading that rises above 6 mm/s RMS. It is a setting that has drifted since commissioning. Renew EK-4234 and re-datum before returning the asset to production, then log the new reading in the machine book. Two people are required for this lift. Allow half a shift. Expect a line stop.",
+  "electrical",
+  "Motor winding insulation degradation after a cold start",
+  "SM-15.6-EK041",
+  4
+ ],
+ [
+  "On the gearbox, oil leak presents as a reading that exceeds 7 ml/min. It is normal service wear reaching its limit. Renew MK-4682 and re-datum before returning the asset to production, then confirm the figure has returned inside tolerance. Isolate and lock off before removing any cover. Allow thirty minutes. Expect a line stop.",
+  "mechanical",
+  "Gearbox oil leak after a cold start",
+  "SM-17.1-MK054",
+  4
+ ],
+ [
+  "On the check valve, leak-back presents as a reading that exceeds 35 ml/min. It is a fastening that has relaxed under thermal cycling. Install HK-2620, then leave the machine on a dry cycle before loading it, then check the trend again on the next shift. Isolate and lock off before removing any cover. Allow twenty five minutes.",
+  "hydraulic",
+  "Check valve leak-back after a cold start",
+  "SM-15.2-HK037",
+  1
+ ],
+ [
+  "On the quench tank, temperature rise presents as a reading that climbs past 57 degrees C. It is a worn quench tank rather than the control system. Install TK-3739, then leave the machine on a dry cycle before loading it, then confirm the figure has returned inside tolerance. Stored energy remains after shutdown; prove dead before starting. Allow half a shift.",
+  "thermal",
+  "Quench tank temperature rise after a cold start",
+  "SM-13.9-TK026",
+  3
+ ],
+ [
+  "On the hydraulic cooler, fouling presents as a reading that drops under 51 l/min. It is contamination tracking in from the surrounding process. Install HK-8884, then leave the machine on a dry cycle before loading it, then confirm the figure has returned inside tolerance. Allow forty five minutes.",
+  "hydraulic",
+  "Hydraulic cooler fouling after a cold start",
+  "SM-15.3-HK038",
+  1
+ ],
+ [
+  "When heat exchanger scaling appears, the reading drops under 55 l/min before any other symptom shows. Treat it as a fastening that has relaxed under thermal cycling. Replace heat exchanger using kit TK-2202. Allow seventy minutes.",
+  "thermal",
+  "Heat exchanger scaling after a cold start",
+  "SM-14.1-TK027",
+  2
+ ],
+ [
+  "When flow divider imbalance appears, the reading falls below 38 bar before any other symptom shows. Treat it as normal service wear reaching its limit. Renew HK-6058 and re-datum before returning the asset to production. Isolate and lock off before removing any cover. Allow twenty minutes.",
+  "hydraulic",
+  "Flow divider imbalance after a cold start",
+  "SM-15.4-HK039",
+  2
+ ],
+ [
+  "When directional valve sticking appears, the reading falls below 34 bar before any other symptom shows. Treat it as an upstream supply problem rather than the directional valve itself. Replace directional valve using kit HK-2305. Isolate and lock off before removing any cover. Allow forty minutes.",
+  "hydraulic",
+  "Directional valve sticking after a cold start",
+  "SM-15.5-HK040",
+  1
+ ],
+ [
+  "On the two-hand control, asynchrony presents as a reading that exceeds 228 ms. It is fatigue at the mounting rather than the two-hand control body. Fit replacement SK-9503 and re-run the commissioning check, then confirm the figure has returned inside tolerance. Hot surfaces remain above 60 degrees C for some time after stopping. Allow thirty minutes.",
+  "safety",
+  "Two-hand control asynchrony after a cold start",
+  "SM-12.9-SK017",
+  2
+ ],
+ [
+  "On the cable gland, ingress presents as a reading that falls below 22.67 megohm. It is contamination tracking in from the surrounding process. Replace cable gland using kit EK-6402, then log the new reading in the machine book. Do not defeat the interlock to gain access. Allow half a shift.",
+  "electrical",
+  "Cable gland ingress after a cold start",
+  "SM-15.7-EK042",
+  1
+ ],
+ [
+  "Reservoir aeration is confirmed when the measured value drops under 16 l/min. The usual cause is a setting that has drifted since commissioning. Replace reservoir using kit HK-4323, then repeat the measurement after fifty operating hours. Allow twenty five minutes.",
+  "hydraulic",
+  "Reservoir aeration after a cold start",
+  "SM-15.6-HK041",
+  3
+ ],
+ [
+  "On the slideway, scoring presents as a reading that exceeds 0.62 mm. It is misalignment introduced at the last rebuild. Fit replacement MK-1302 and re-run the commissioning check, then log the new reading in the machine book. Do not defeat the interlock to gain access. Allow forty five minutes.",
+  "mechanical",
+  "Slideway scoring after a cold start",
+  "SM-17.2-MK055",
+  3
+ ],
+ [
+  "When robot gripper grip loss appears, the reading falls below 211 Nm before any other symptom shows. Treat it as a setting that has drifted since commissioning. Replace robot gripper using kit MK-7207. Two people are required for this lift. Allow fifteen minutes.",
+  "mechanical",
+  "Robot gripper grip loss after a cold start",
+  "SM-17.3-MK056",
+  2
+ ],
+ [
+  "On the air dryer, dew point rise presents as a reading that climbs past 27 degrees C. It is a setting that has drifted since commissioning. Renew PK-7435 and re-datum before returning the asset to production, then repeat the measurement after fifty operating hours. Allow thirty minutes.",
+  "pneumatic",
+  "Air dryer dew point rise after a cold start",
+  "SM-13.8-PK025",
+  2
+ ],
+ [
+  "When manifold gasket leak appears, the reading exceeds 66 ml/min before any other symptom shows. Treat it as a worn manifold gasket rather than the control system. Change PK-3923 as a set; matched pairs must not be mixed with used items. Two people are required for this lift. Allow an hour.",
+  "pneumatic",
+  "Manifold gasket leak after a cold start",
+  "SM-13.9-PK026",
+  1
+ ],
+ [
+  "Pump coupling wear is confirmed when the measured value exceeds 0.83 mm. The usual cause is a fastening that has relaxed under thermal cycling. Install HK-3030, then leave the machine on a dry cycle before loading it, then repeat the measurement after fifty operating hours. Hot surfaces remain above 60 degrees C for some time after stopping. Allow forty minutes.",
+  "hydraulic",
+  "Pump coupling wear after a cold start",
+  "SM-15.7-HK042",
+  1
+ ],
+ [
+  "When solenoid valve slow shift appears, the reading exceeds 286 ms before any other symptom shows. Treat it as normal service wear reaching its limit. Renew PK-7907 and re-datum before returning the asset to production. Wear eye protection: the assembly is under spring load. Allow forty minutes.",
+  "pneumatic",
+  "Solenoid valve slow shift after a cold start",
+  "SM-14.1-PK027",
+  1
+ ],
+ [
+  "When turntable bearing roughness appears, the reading rises above 3 mm/s RMS before any other symptom shows. Treat it as normal service wear reaching its limit. Install MK-5177, then leave the machine on a dry cycle before loading it. Hot surfaces remain above 60 degrees C for some time after stopping. Allow an hour.",
+  "mechanical",
+  "Turntable bearing roughness after a cold start",
+  "SM-17.4-MK057",
+  2
+ ],
+ [
+  "Busbar hot joint is confirmed when the measured value exceeds 180 A. The usual cause is fatigue at the mounting rather than the busbar body. Swap EK-1197 and check against the acceptance figure in this chapter, then log the new reading in the machine book. Do not defeat the interlock to gain access. Allow twenty five minutes.",
+  "electrical",
+  "Busbar hot joint after a cold start",
+  "SM-15.8-EK043",
+  2
+ ],
+ [
+  "Accumulator precharge loss is confirmed when the measured value falls below 57 bar. The usual cause is normal service wear reaching its limit. Swap HK-4188 and check against the acceptance figure in this chapter, then log the new reading in the machine book. Stored energy remains after shutdown; prove dead before starting. Allow ninety minutes. Expect a line stop.",
+  "hydraulic",
+  "Accumulator precharge loss after a cold start",
+  "SM-15.8-HK043",
+  4
+ ],
+ [
+  "On the oven element, open circuit presents as a reading that exceeds 20.74 megohm. It is misalignment introduced at the last rebuild. Replace oven element using kit TK-7302, then log the new reading in the machine book. Hot surfaces remain above 60 degrees C for some time after stopping. Allow seventy minutes.",
+  "thermal",
+  "Oven element open circuit after a cold start",
+  "SM-14.2-TK028",
+  1
+ ],
+ [
+  "On the indexer, overshoot presents as a reading that exceeds 0.33 mm. It is fatigue at the mounting rather than the indexer body. Swap MK-2796 and check against the acceptance figure in this chapter, then check the trend again on the next shift. Wear eye protection: the assembly is under spring load. Allow seventy minutes.",
+  "mechanical",
+  "Indexer overshoot after a cold start",
+  "SM-17.5-MK058",
+  1
+ ],
+ [
+  "When flexible coupling misalignment appears, the reading exceeds 0.58 mm before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Install MK-7533, then leave the machine on a dry cycle before loading it. Allow twenty five minutes.",
+  "mechanical",
+  "Flexible coupling misalignment after a cold start",
+  "SM-17.6-MK059",
+  1
+ ],
+ [
+  "On the proximity sensor, intermittent output presents as a reading that exceeds 35 mV. It is a setting that has drifted since commissioning. Install EK-5511, then leave the machine on a dry cycle before loading it, then log the new reading in the machine book. Two people are required for this lift. Allow twenty minutes.",
+  "electrical",
+  "Proximity sensor intermittent output after a cold start",
+  "SM-15.9-EK044",
+  2
+ ],
+ [
+  "When blow-off nozzle misdirection appears, the reading falls below 4 bar before any other symptom shows. Treat it as fatigue at the mounting rather than the blow-off nozzle body. Swap PK-2176 and check against the acceptance figure in this chapter. Do not defeat the interlock to gain access. Allow twenty five minutes.",
+  "pneumatic",
+  "Blow-off nozzle misdirection after a cold start",
+  "SM-14.2-PK028",
+  1
+ ],
+ [
+  "Spindle cooler flow restriction is confirmed when the measured value drops under 86 l/min. The usual cause is a setting that has drifted since commissioning. Change TK-8541 as a set; matched pairs must not be mixed with used items, then log the new reading in the machine book. Stored energy remains after shutdown; prove dead before starting. Allow an hour.",
+  "thermal",
+  "Spindle cooler flow restriction after a cold start",
+  "SM-14.3-TK029",
+  2
+ ],
+ [
+  "On the shielding, ground loop presents as a reading that exceeds 328 mV. It is contamination tracking in from the surrounding process. Renew EK-3730 and re-datum before returning the asset to production, then log the new reading in the machine book. Two people are required for this lift. Allow two hours.",
+  "electrical",
+  "Shielding ground loop after a cold start",
+  "SM-16.1-EK045",
+  1
+ ],
+ [
+  "Way covers wear is confirmed when the measured value exceeds 0.34 mm. The usual cause is misalignment introduced at the last rebuild. Change MK-9500 as a set; matched pairs must not be mixed with used items, then repeat the measurement after fifty operating hours. Two people are required for this lift. Allow seventy minutes.",
+  "mechanical",
+  "Way covers wear after a cold start",
+  "SM-17.7-MK060",
+  2
+ ],
+ [
+  "Regulator creep is confirmed when the measured value falls below 100 Nm. The usual cause is an upstream supply problem rather than the regulator itself. Swap PK-4891 and check against the acceptance figure in this chapter, then check the trend again on the next shift. Stored energy remains after shutdown; prove dead before starting. Allow fifteen minutes.",
+  "pneumatic",
+  "Regulator creep after a cold start",
+  "SM-14.3-PK029",
+  1
+ ],
+ [
+  "On the induction coil, cooling loss presents as a reading that climbs past -13 degrees C. It is misalignment introduced at the last rebuild. Change TK-6996 as a set; matched pairs must not be mixed with used items, then check the trend again on the next shift. Wear eye protection: the assembly is under spring load. Allow twenty minutes.",
+  "thermal",
+  "Induction coil cooling loss after a cold start",
+  "SM-14.4-TK030",
+  1
+ ],
+ [
+  "On the ballscrew, backlash presents as a reading that exceeds 0.49 mm. It is a fastening that has relaxed under thermal cycling. Change MK-4818 as a set; matched pairs must not be mixed with used items, then confirm the figure has returned inside tolerance. Two people are required for this lift. Allow an hour.",
+  "mechanical",
+  "Ballscrew backlash after a cold start",
+  "SM-17.8-MK061",
+  2
+ ],
+ [
+  "On the PLC input card, channel failure presents as a reading that exceeds 22 mV. It is contamination tracking in from the surrounding process. Replace PLC input card using kit EK-4761, then repeat the measurement after fifty operating hours. Hot surfaces remain above 60 degrees C for some time after stopping. Allow an hour.",
+  "electrical",
+  "Plc input card channel failure after a cold start",
+  "SM-16.2-EK046",
+  2
+ ],
+ [
+  "Light curtain muting fault is confirmed when the measured value exceeds 244 ms. The usual cause is a fastening that has relaxed under thermal cycling. Replace light curtain using kit SK-8008, then confirm the figure has returned inside tolerance. Do not defeat the interlock to gain access. Allow thirty minutes.",
+  "safety",
+  "Light curtain muting fault after a cold start",
+  "SM-13.1-SK018",
+  1
+ ],
+ [
+  "When thermocouple drift appears, the reading falls below 36 Nm before any other symptom shows. Treat it as an upstream supply problem rather than the thermocouple itself. Change TK-8683 as a set; matched pairs must not be mixed with used items. Wear eye protection: the assembly is under spring load. Allow fifteen minutes. Expect a line stop.",
+  "thermal",
+  "Thermocouple drift after a cold start",
+  "SM-14.5-TK031",
+  4
+ ],
+ [
+  "On the counterbalance, drift presents as a reading that falls below 116 Nm. It is a fastening that has relaxed under thermal cycling. Renew MK-7871 and re-datum before returning the asset to production, then repeat the measurement after fifty operating hours. Isolate and lock off before removing any cover. Allow thirty minutes.",
+  "mechanical",
+  "Counterbalance drift after a cold start",
+  "SM-17.9-MK062",
+  2
+ ],
+ [
+  "Drive coupling backlash is confirmed when the measured value exceeds 0.16 mm. The usual cause is normal service wear reaching its limit. Swap MK-4407 and check against the acceptance figure in this chapter, then repeat the measurement after fifty operating hours. Allow ninety minutes.",
+  "mechanical",
+  "Drive coupling backlash after a cold start",
+  "SM-18.1-MK063",
+  2
+ ],
+ [
+  "Cam follower flat spotting is confirmed when the measured value rises above 7 mm/s RMS. The usual cause is a fastening that has relaxed under thermal cycling. Swap MK-2009 and check against the acceptance figure in this chapter, then check the trend again on the next shift. Stored energy remains after shutdown; prove dead before starting. Allow two hours.",
+  "mechanical",
+  "Cam follower flat spotting after a cold start",
+  "SM-18.2-MK064",
+  2
+ ],
+ [
+  "When timing belt tooth wear appears, the reading exceeds 0.2 mm before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Renew MK-4656 and re-datum before returning the asset to production. Stored energy remains after shutdown; prove dead before starting. Allow seventy minutes.",
+  "mechanical",
+  "Timing belt tooth wear after a cold start",
+  "SM-18.3-MK065",
+  1
+ ],
+ [
+  "When vacuum generator loss of vacuum appears, the reading drops under 44 l/min before any other symptom shows. Treat it as fatigue at the mounting rather than the vacuum generator body. Change PK-7941 as a set; matched pairs must not be mixed with used items. Hot surfaces remain above 60 degrees C for some time after stopping. Allow twenty minutes.",
+  "pneumatic",
+  "Vacuum generator loss of vacuum after a cold start",
+  "SM-14.4-PK030",
+  2
+ ],
+ [
+  "On the safety relay, cross fault presents as a reading that exceeds 344 ms. It is a setting that has drifted since commissioning. Install SK-2920, then leave the machine on a dry cycle before loading it, then confirm the figure has returned inside tolerance. Wear eye protection: the assembly is under spring load. Allow forty minutes.",
+  "safety",
+  "Safety relay cross fault after a cold start",
+  "SM-13.2-SK019",
+  2
+ ],
+ [
+  "On the door lock solenoid, sticking presents as a reading that falls below 212 bar. It is normal service wear reaching its limit. Fit replacement SK-4110 and re-run the commissioning check, then log the new reading in the machine book. Wear eye protection: the assembly is under spring load. Allow half a shift.",
+  "safety",
+  "Door lock solenoid sticking after a cold start",
+  "SM-13.3-SK020",
+  2
+ ],
+ [
+  "Shaft seal weep is confirmed when the measured value exceeds 65 ml/min. The usual cause is contamination tracking in from the surrounding process. Replace shaft seal using kit MK-8795, then confirm the figure has returned inside tolerance. Do not defeat the interlock to gain access. Allow twenty five minutes.",
+  "mechanical",
+  "Shaft seal weep after a cold start",
+  "SM-18.4-MK066",
+  1
+ ],
+ [
+  "Pressure switch setpoint drift is confirmed when the measured value falls below 63 Nm. The usual cause is fatigue at the mounting rather than the pressure switch body. Change PK-7896 as a set; matched pairs must not be mixed with used items, then repeat the measurement after fifty operating hours. Wear eye protection: the assembly is under spring load. Allow an hour.",
+  "pneumatic",
+  "Pressure switch setpoint drift after a cold start",
+  "SM-14.5-PK031",
+  2
+ ],
+ [
+  "When FRL unit bowl contamination appears, the reading drops under 53 l/min before any other symptom shows. Treat it as fatigue at the mounting rather than the FRL unit body. Replace FRL unit using kit PK-4974. Do not defeat the interlock to gain access. Allow forty minutes.",
+  "pneumatic",
+  "Frl unit bowl contamination after a cold start",
+  "SM-14.6-PK032",
+  2
+ ],
+ [
+  "On the return filter, bypass presents as a reading that exceeds 74 ml/min. It is contamination tracking in from the surrounding process. Install HK-8727, then leave the machine on a dry cycle before loading it, then repeat the measurement after fifty operating hours. Isolate and lock off before removing any cover. Allow half a shift.",
+  "hydraulic",
+  "Return filter bypass after a cold start",
+  "SM-15.9-HK044",
+  1
+ ],
+ [
+  "On the overtravel limit, false trip presents as a reading that exceeds 471 ms. It is contamination tracking in from the surrounding process. Change SK-3424 as a set; matched pairs must not be mixed with used items, then check the trend again on the next shift. Hot surfaces remain above 60 degrees C for some time after stopping. Allow forty five minutes.",
+  "safety",
+  "Overtravel limit false trip after a cold start",
+  "SM-13.4-SK021",
+  1
+ ],
+ [
+  "Quick exhaust valve restriction is confirmed when the measured value drops under 61 l/min. The usual cause is normal service wear reaching its limit. Install PK-7172, then leave the machine on a dry cycle before loading it, then confirm the figure has returned inside tolerance. Wear eye protection: the assembly is under spring load. Allow ninety minutes.",
+  "pneumatic",
+  "Quick exhaust valve restriction after a cold start",
+  "SM-14.7-PK033",
+  2
+ ],
+ [
+  "On the servo valve, null shift presents as a reading that falls below 74 bar. It is an upstream supply problem rather than the servo valve itself. Replace servo valve using kit HK-7803, then log the new reading in the machine book. Stored energy remains after shutdown; prove dead before starting. Allow forty minutes.",
+  "hydraulic",
+  "Servo valve null shift after a cold start",
+  "SM-16.1-HK045",
+  2
+ ],
+ [
+  "When EMC filter leakage appears, the reading exceeds 40 ml/min before any other symptom shows. Treat it as a worn EMC filter rather than the control system. Replace EMC filter using kit EK-1220. Stored energy remains after shutdown; prove dead before starting. Allow ninety minutes.",
+  "electrical",
+  "Emc filter leakage after a cold start",
+  "SM-16.3-EK047",
+  1
+ ],
+ [
+  "When rotary table index error appears, the reading exceeds 0.15 mm before any other symptom shows. Treat it as normal service wear reaching its limit. Change MK-4746 as a set; matched pairs must not be mixed with used items. Allow forty minutes.",
+  "mechanical",
+  "Rotary table index error after a cold start",
+  "SM-18.5-MK067",
+  1
+ ],
+ [
+  "Terminal block loose connection is confirmed when the measured value exceeds 398 mV. The usual cause is fatigue at the mounting rather than the terminal block body. Renew EK-7972 and re-datum before returning the asset to production, then repeat the measurement after fifty operating hours. Isolate and lock off before removing any cover. Allow seventy minutes.",
+  "electrical",
+  "Terminal block loose connection after a cold start",
+  "SM-16.4-EK048",
+  1
+ ],
+ [
+  "When roller bearing pitting appears, the reading rises above 3 mm/s RMS before any other symptom shows. Treat it as normal service wear reaching its limit. Renew MK-5761 and re-datum before returning the asset to production. Allow thirty minutes.",
+  "mechanical",
+  "Roller bearing pitting after a cold start",
+  "SM-18.6-MK068",
+  2
+ ],
+ [
+  "When earth bond high impedance appears, the reading falls below 40.71 megohm before any other symptom shows. Treat it as normal service wear reaching its limit. Install EK-2339, then leave the machine on a dry cycle before loading it. Two people are required for this lift. Allow twenty five minutes.",
+  "electrical",
+  "Earth bond high impedance after a cold start",
+  "SM-16.5-EK049",
+  3
+ ],
+ [
+  "When turret clamp slippage appears, the reading falls below 203 Nm before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Replace turret clamp using kit MK-8718. Stored energy remains after shutdown; prove dead before starting. Allow thirty minutes.",
+  "mechanical",
+  "Turret clamp slippage after a cold start",
+  "SM-18.7-MK069",
+  2
+ ],
+ [
+  "Insulation panel degradation is confirmed when the measured value rises above 4 mm/s RMS. The usual cause is an upstream supply problem rather than the insulation panel itself. Replace insulation panel using kit TK-5303, then confirm the figure has returned inside tolerance. Allow fifteen minutes.",
+  "thermal",
+  "Insulation panel degradation after a cold start",
+  "SM-14.6-TK032",
+  1
+ ],
+ [
+  "Safety plc diagnostic fault is confirmed when the measured value exceeds 463 ms. The usual cause is fatigue at the mounting rather than the safety PLC body. Replace safety PLC using kit SK-5431, then check the trend again on the next shift. Allow fifteen minutes.",
+  "safety",
+  "Safety plc diagnostic fault after a cold start",
+  "SM-13.5-SK022",
+  1
+ ],
+ [
+  "When hot runner zone imbalance appears, the reading falls below 76 bar before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Swap TK-3029 and check against the acceptance figure in this chapter. Two people are required for this lift. Allow fifteen minutes.",
+  "thermal",
+  "Hot runner zone imbalance after a cold start",
+  "SM-14.7-TK033",
+  2
+ ],
+ [
+  "Line reactor saturation is confirmed when the measured value exceeds 99 A. The usual cause is fatigue at the mounting rather than the line reactor body. Install EK-6465, then leave the machine on a dry cycle before loading it, then check the trend again on the next shift. Stored energy remains after shutdown; prove dead before starting. Allow fifteen minutes.",
+  "electrical",
+  "Line reactor saturation after a cold start",
+  "SM-16.6-EK050",
+  2
+ ],
+ [
+  "When cooling fan bearing failure appears, the reading rises above 6 mm/s RMS before any other symptom shows. Treat it as a fastening that has relaxed under thermal cycling. Swap TK-9862 and check against the acceptance figure in this chapter. Two people are required for this lift. Allow half a shift.",
+  "thermal",
+  "Cooling fan bearing failure after a cold start",
+  "SM-14.8-TK034",
+  2
+ ],
+ [
+  "On the bearing housing, looseness presents as a reading that rises above 7 mm/s RMS. It is a setting that has drifted since commissioning. Fit replacement MK-1745 and re-run the commissioning check, then confirm the figure has returned inside tolerance. Allow half a shift.",
+  "mechanical",
+  "Bearing housing looseness after a cold start",
+  "SM-18.8-MK070",
+  3
+ ],
+ [
+  "When pallet changer seating error appears, the reading exceeds 0.44 mm before any other symptom shows. Treat it as a fastening that has relaxed under thermal cycling. Swap MK-7406 and check against the acceptance figure in this chapter. Allow an hour.",
+  "mechanical",
+  "Pallet changer seating error after a cold start",
+  "SM-18.9-MK071",
+  2
+ ],
+ [
+  "On the pressure mat, dead zone presents as a reading that exceeds 0.42 mm. It is a worn pressure mat rather than the control system. Install SK-3264, then leave the machine on a dry cycle before loading it, then repeat the measurement after fifty operating hours. Allow thirty minutes.",
+  "safety",
+  "Pressure mat dead zone after a cold start",
+  "SM-13.6-SK023",
+  1
+ ],
+ [
+  "Pressure relief valve chatter is confirmed when the measured value falls below 204 bar. The usual cause is normal service wear reaching its limit. Swap HK-9161 and check against the acceptance figure in this chapter, then confirm the figure has returned inside tolerance. Two people are required for this lift. Allow fifteen minutes.",
+  "hydraulic",
+  "Pressure relief valve chatter after a cold start",
+  "SM-16.2-HK046",
+  2
+ ],
+ [
+  "Radiator core blockage is confirmed when the measured value drops under 6 l/min. The usual cause is a fastening that has relaxed under thermal cycling. Change TK-3997 as a set; matched pairs must not be mixed with used items, then check the trend again on the next shift. Isolate and lock off before removing any cover. Allow fifteen minutes.",
+  "thermal",
+  "Radiator core blockage after a cold start",
+  "SM-14.9-TK035",
+  2
+ ],
+ [
+  "Silencer clogging is confirmed when the measured value drops under 6 l/min. The usual cause is misalignment introduced at the last rebuild. Fit replacement PK-3086 and re-run the commissioning check, then log the new reading in the machine book. Isolate and lock off before removing any cover. Allow two hours.",
+  "pneumatic",
+  "Silencer clogging after a cold start",
+  "SM-14.8-PK034",
+  2
+ ],
+ [
+  "On the rope pull switch, tension loss presents as a reading that falls below 191 Nm. It is normal service wear reaching its limit. Replace rope pull switch using kit SK-4253, then repeat the measurement after fifty operating hours. Stored energy remains after shutdown; prove dead before starting. Allow twenty minutes.",
+  "safety",
+  "Rope pull switch tension loss after a cold start",
+  "SM-13.7-SK024",
+  1
+ ],
+ [
+  "Chuck jaws grip loss is confirmed when the measured value falls below 80 Nm. The usual cause is a worn chuck jaws rather than the control system. Renew MK-5751 and re-datum before returning the asset to production, then log the new reading in the machine book. Stored energy remains after shutdown; prove dead before starting. Allow forty minutes.",
+  "mechanical",
+  "Chuck jaws grip loss after a cold start",
+  "SM-19.1-MK072",
+  1
+ ],
+ [
+  "On the tailstock, alignment presents as a reading that exceeds 0.21 mm. It is a fastening that has relaxed under thermal cycling. Swap MK-1843 and check against the acceptance figure in this chapter, then check the trend again on the next shift. Allow forty minutes.",
+  "mechanical",
+  "Tailstock alignment after a cold start",
+  "SM-19.2-MK073",
+  3
+ ],
+ [
+  "Air receiver condensate build-up is confirmed when the measured value drops under 52 l/min. The usual cause is a fastening that has relaxed under thermal cycling. Install PK-8251, then leave the machine on a dry cycle before loading it, then repeat the measurement after fifty operating hours. Allow half a shift.",
+  "pneumatic",
+  "Air receiver condensate build-up after a cold start",
+  "SM-14.9-PK035",
+  2
+ ],
+ [
+  "Air cylinder cushion loss is confirmed when the measured value drops under 31 l/min. The usual cause is misalignment introduced at the last rebuild. Renew PK-8086 and re-datum before returning the asset to production, then check the trend again on the next shift. Isolate and lock off before removing any cover. Allow forty minutes.",
+  "pneumatic",
+  "Air cylinder cushion loss after a cold start",
+  "SM-15.1-PK036",
+  2
+ ],
+ [
+  "Pilot line restriction is confirmed when the measured value drops under 58 l/min. The usual cause is a setting that has drifted since commissioning. Change HK-2924 as a set; matched pairs must not be mixed with used items, then confirm the figure has returned inside tolerance. Wear eye protection: the assembly is under spring load. Allow an hour.",
+  "hydraulic",
+  "Pilot line restriction after a cold start",
+  "SM-16.3-HK047",
+  1
+ ],
+ [
+  "On the cabinet air conditioner, icing presents as a reading that falls below 0 degrees C. It is normal service wear reaching its limit. Fit replacement TK-1529 and re-run the commissioning check, then check the trend again on the next shift. Wear eye protection: the assembly is under spring load. Allow fifteen minutes.",
+  "thermal",
+  "Cabinet air conditioner icing after a cold start",
+  "SM-15.1-TK036",
+  2
+ ],
+ [
+  "When motor bearing electrical erosion appears, the reading exceeds 5 A before any other symptom shows. Treat it as normal service wear reaching its limit. Swap EK-1712 and check against the acceptance figure in this chapter. Allow two hours.",
+  "electrical",
+  "Motor bearing electrical erosion after a cold start",
+  "SM-16.7-EK051",
+  2
+ ],
+ [
+  "On the case drain, excess flow presents as a reading that exceeds 53 ml/min. It is a setting that has drifted since commissioning. Fit replacement HK-3806 and re-run the commissioning check, then repeat the measurement after fifty operating hours. Two people are required for this lift. Allow ninety minutes.",
+  "hydraulic",
+  "Case drain excess flow after a cold start",
+  "SM-16.4-HK048",
+  2
+ ],
+ [
+  "On the spindle taper, fretting presents as a reading that exceeds 0.35 mm. It is contamination tracking in from the surrounding process. Swap MK-8572 and check against the acceptance figure in this chapter, then confirm the figure has returned inside tolerance. Allow forty five minutes.",
+  "mechanical",
+  "Spindle taper fretting after a cold start",
+  "SM-19.3-MK074",
+  1
+ ],
+ [
+  "Relay contact bounce is confirmed when the measured value exceeds 211 mV. The usual cause is contamination tracking in from the surrounding process. Replace relay using kit EK-1343, then repeat the measurement after fifty operating hours. Allow an hour.",
+  "electrical",
+  "Relay contact bounce after a cold start",
+  "SM-16.8-EK052",
+  3
+ ],
+ [
+  "On the PSU, output droop presents as a reading that exceeds 51 A. It is fatigue at the mounting rather than the PSU body. Install EK-1633, then leave the machine on a dry cycle before loading it, then log the new reading in the machine book. Two people are required for this lift. Allow twenty five minutes.",
+  "electrical",
+  "Psu output droop after a cold start",
+  "SM-16.9-EK053",
+  2
+ ],
+ [
+  "On the VFD, DC bus ripple presents as a reading that exceeds 39 A. It is misalignment introduced at the last rebuild. Renew EK-2729 and re-datum before returning the asset to production, then repeat the measurement after fifty operating hours. Allow thirty minutes.",
+  "electrical",
+  "Vfd DC bus ripple after a cold start",
+  "SM-17.1-EK054",
+  3
+ ],
+ [
+  "When chain drive elongation appears, the reading exceeds 0.61 mm before any other symptom shows. Treat it as a worn chain drive rather than the control system. Replace chain drive using kit MK-3152. Stored energy remains after shutdown; prove dead before starting. Allow thirty minutes.",
+  "mechanical",
+  "Chain drive elongation after a cold start",
+  "SM-19.4-MK075",
+  2
+ ],
+ [
+  "Clamp cylinder creep is confirmed when the measured value falls below 84 Nm. The usual cause is an upstream supply problem rather than the clamp cylinder itself. Swap MK-1683 and check against the acceptance figure in this chapter, then check the trend again on the next shift. Allow fifteen minutes. Expect a line stop.",
+  "mechanical",
+  "Clamp cylinder creep at high duty",
+  "SM-19.5-MK076",
+  4
+ ],
+ [
+  "On the fieldbus, CRC errors presents as a reading that exceeds 284 mV. It is normal service wear reaching its limit. Renew EK-8729 and re-datum before returning the asset to production, then check the trend again on the next shift. Stored energy remains after shutdown; prove dead before starting. Allow ninety minutes.",
+  "electrical",
+  "Fieldbus CRC errors at high duty",
+  "SM-17.2-EK055",
+  2
+ ],
+ [
+  "When cylinder rod seal weep appears, the reading exceeds 25 ml/min before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Install HK-3153, then leave the machine on a dry cycle before loading it. Allow thirty minutes.",
+  "hydraulic",
+  "Cylinder rod seal weep at high duty",
+  "SM-16.5-HK049",
+  1
+ ],
+ [
+  "When hydraulic hose abrasion appears, the reading falls below 93 bar before any other symptom shows. Treat it as an upstream supply problem rather than the hydraulic hose itself. Change HK-8911 as a set; matched pairs must not be mixed with used items. Wear eye protection: the assembly is under spring load. Allow an hour.",
+  "hydraulic",
+  "Hydraulic hose abrasion at high duty",
+  "SM-16.6-HK050",
+  1
+ ],
+ [
+  "Proportional valve hysteresis is confirmed when the measured value falls below 111 bar. The usual cause is an upstream supply problem rather than the proportional valve itself. Install HK-8867, then leave the machine on a dry cycle before loading it, then log the new reading in the machine book. Do not defeat the interlock to gain access. Allow twenty five minutes.",
+  "hydraulic",
+  "Proportional valve hysteresis at high duty",
+  "SM-16.7-HK051",
+  2
+ ],
+ [
+  "On the resolver, phase error presents as a reading that exceeds 53 mV. It is normal service wear reaching its limit. Renew EK-5597 and re-datum before returning the asset to production, then repeat the measurement after fifty operating hours. Wear eye protection: the assembly is under spring load. Allow forty minutes.",
+  "electrical",
+  "Resolver phase error at high duty",
+  "SM-17.3-EK056",
+  3
+ ],
+ [
+  "Contactor welded contacts is confirmed when the measured value exceeds 341 mV. The usual cause is misalignment introduced at the last rebuild. Swap EK-2007 and check against the acceptance figure in this chapter, then check the trend again on the next shift. Wear eye protection: the assembly is under spring load. Allow seventy minutes.",
+  "electrical",
+  "Contactor welded contacts at high duty",
+  "SM-17.4-EK057",
+  3
+ ],
+ [
+  "When process water loop temperature swing appears, the reading climbs past 54 degrees C before any other symptom shows. Treat it as normal service wear reaching its limit. Change TK-8387 as a set; matched pairs must not be mixed with used items. Wear eye protection: the assembly is under spring load. Allow fifteen minutes.",
+  "thermal",
+  "Process water loop temperature swing at high duty",
+  "SM-15.2-TK037",
+  1
+ ],
+ [
+  "Suction strainer blockage is confirmed when the measured value drops under 20 l/min. The usual cause is misalignment introduced at the last rebuild. Replace suction strainer using kit HK-9728, then repeat the measurement after fifty operating hours. Wear eye protection: the assembly is under spring load. Allow forty minutes. Expect a line stop.",
+  "hydraulic",
+  "Suction strainer blockage at high duty",
+  "SM-16.8-HK052",
+  4
+ ],
+ [
+  "On the palletiser arm, overshoot presents as a reading that exceeds 0.21 mm. It is misalignment introduced at the last rebuild. Swap MK-6110 and check against the acceptance figure in this chapter, then repeat the measurement after fifty operating hours. Isolate and lock off before removing any cover. Allow seventy minutes.",
+  "mechanical",
+  "Palletiser arm overshoot at high duty",
+  "SM-19.6-MK077",
+  2
+ ],
+ [
+  "Brake resistor overheating is confirmed when the measured value climbs past 15 degrees C. The usual cause is normal service wear reaching its limit. Change EK-7437 as a set; matched pairs must not be mixed with used items, then log the new reading in the machine book. Do not defeat the interlock to gain access. Allow twenty minutes.",
+  "electrical",
+  "Brake resistor overheating at high duty",
+  "SM-17.5-EK058",
+  1
+ ],
+ [
+  "On the vibration damper, degradation presents as a reading that rises above 7 mm/s RMS. It is normal service wear reaching its limit. Change MK-5542 as a set; matched pairs must not be mixed with used items, then log the new reading in the machine book. Allow ninety minutes.",
+  "mechanical",
+  "Vibration damper degradation at high duty",
+  "SM-19.7-MK078",
+  1
+ ],
+ [
+  "Motor winding insulation degradation is confirmed when the measured value rises above 8 mm/s RMS. The usual cause is a fastening that has relaxed under thermal cycling. Replace motor winding using kit EK-6210, then log the new reading in the machine book. Allow forty minutes.",
+  "electrical",
+  "Motor winding insulation degradation at high duty",
+  "SM-17.6-EK059",
+  2
+ ],
+ [
+  "When gearbox oil leak appears, the reading exceeds 43 ml/min before any other symptom shows. Treat it as contamination tracking in from the surrounding process. Fit replacement MK-2636 and re-run the commissioning check. Stored energy remains after shutdown; prove dead before starting. Allow half a shift.",
+  "mechanical",
+  "Gearbox oil leak at high duty",
+  "SM-19.8-MK079",
+  2
+ ],
+ [
+  "Check valve leak-back is confirmed when the measured value exceeds 75 ml/min. The usual cause is a worn check valve rather than the control system. Renew HK-5950 and re-datum before returning the asset to production, then check the trend again on the next shift. Allow twenty minutes.",
+  "hydraulic",
+  "Check valve leak-back at high duty",
+  "SM-16.9-HK053",
+  3
+ ],
+ [
+  "On the quench tank, temperature rise presents as a reading that climbs past 175 degrees C. It is normal service wear reaching its limit. Renew TK-3378 and re-datum before returning the asset to production, then check the trend again on the next shift. Stored energy remains after shutdown; prove dead before starting. Allow ninety minutes.",
+  "thermal",
+  "Quench tank temperature rise at high duty",
+  "SM-15.3-TK038",
+  2
+ ],
+ [
+  "When hydraulic cooler fouling appears, the reading drops under 88 l/min before any other symptom shows. Treat it as contamination tracking in from the surrounding process. Swap HK-7348 and check against the acceptance figure in this chapter. Do not defeat the interlock to gain access. Allow twenty five minutes.",
+  "hydraulic",
+  "Hydraulic cooler fouling at high duty",
+  "SM-17.1-HK054",
+  1
+ ],
+ [
+  "Heat exchanger scaling is confirmed when the measured value drops under 33 l/min. The usual cause is a worn heat exchanger rather than the control system. Swap TK-7988 and check against the acceptance figure in this chapter, then check the trend again on the next shift. Wear eye protection: the assembly is under spring load. Allow seventy minutes.",
+  "thermal",
+  "Heat exchanger scaling at high duty",
+  "SM-15.4-TK039",
+  1
+ ],
+ [
+  "When flow divider imbalance appears, the reading falls below 66 bar before any other symptom shows. Treat it as contamination tracking in from the surrounding process. Change HK-8038 as a set; matched pairs must not be mixed with used items. Wear eye protection: the assembly is under spring load. Allow seventy minutes.",
+  "hydraulic",
+  "Flow divider imbalance at high duty",
+  "SM-17.2-HK055",
+  2
+ ],
+ [
+  "Directional valve sticking is confirmed when the measured value falls below 159 bar. The usual cause is a setting that has drifted since commissioning. Change HK-9401 as a set; matched pairs must not be mixed with used items, then log the new reading in the machine book. Wear eye protection: the assembly is under spring load. Allow two hours.",
+  "hydraulic",
+  "Directional valve sticking at high duty",
+  "SM-17.3-HK056",
+  1
+ ],
+ [
+  "When two-hand control asynchrony appears, the reading exceeds 101 ms before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Swap SK-5720 and check against the acceptance figure in this chapter. Allow ninety minutes.",
+  "safety",
+  "Two-hand control asynchrony at high duty",
+  "SM-13.8-SK025",
+  2
+ ],
+ [
+  "When cable gland ingress appears, the reading falls below 17.09 megohm before any other symptom shows. Treat it as a setting that has drifted since commissioning. Fit replacement EK-1751 and re-run the commissioning check. Hot surfaces remain above 60 degrees C for some time after stopping. Allow forty five minutes.",
+  "electrical",
+  "Cable gland ingress at high duty",
+  "SM-17.7-EK060",
+  2
+ ],
+ [
+  "When reservoir aeration appears, the reading drops under 86 l/min before any other symptom shows. Treat it as fatigue at the mounting rather than the reservoir body. Renew HK-8774 and re-datum before returning the asset to production. Wear eye protection: the assembly is under spring load. Allow forty five minutes.",
+  "hydraulic",
+  "Reservoir aeration at high duty",
+  "SM-17.4-HK057",
+  1
+ ],
+ [
+  "Slideway scoring is confirmed when the measured value exceeds 0.52 mm. The usual cause is a setting that has drifted since commissioning. Swap MK-7829 and check against the acceptance figure in this chapter, then log the new reading in the machine book. Wear eye protection: the assembly is under spring load. Allow seventy minutes.",
+  "mechanical",
+  "Slideway scoring at high duty",
+  "SM-19.9-MK080",
+  2
+ ],
+ [
+  "When robot gripper grip loss appears, the reading falls below 55 Nm before any other symptom shows. Treat it as misalignment introduced at the last rebuild. Install MK-3939, then leave the machine on a dry cycle before loading it. Allow two hours.",
+  "mechanical",
+  "Robot gripper grip loss at high duty",
+  "SM-20.1-MK081",
+  2
+ ],
+ [
+  "When air dryer dew point rise appears, the reading climbs past 125 degrees C before any other symptom shows. Treat it as a fastening that has relaxed under thermal cycling. Fit replacement PK-6384 and re-run the commissioning check. Stored energy remains after shutdown; prove dead before starting. Allow seventy minutes.",
+  "pneumatic",
+  "Air dryer dew point rise at high duty",
+  "SM-15.2-PK037",
+  2
+ ],
+ [
+  "On the manifold gasket, leak presents as a reading that exceeds 68 ml/min. It is a worn manifold gasket rather than the control system. Replace manifold gasket using kit PK-4286, then repeat the measurement after fifty operating hours. Stored energy remains after shutdown; prove dead before starting. Allow twenty five minutes. Expect a line stop.",
+  "pneumatic",
+  "Manifold gasket leak at high duty",
+  "SM-15.3-PK038",
+  4
+ ]
+]

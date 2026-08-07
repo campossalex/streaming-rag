@@ -1,0 +1,29 @@
+-- =====================================================================
+-- MOVED.
+--
+-- This file used to be a single self-contained copy of the whole pipeline, kept by hand
+-- alongside the real thing. Nothing ever executed it -- it is not mounted into any container
+-- and no script references it -- so it drifted badly: by the time it was noticed it was missing
+-- the incident store, the JDBC sinks, alarm_id, the latency timestamps and the watermarks.
+--
+-- A duplicate nobody runs is a duplicate nobody updates. The SQL now lives in one place, split
+-- so it can be read a piece at a time:
+--
+--   deploy/sql/ddl/01_sources.sql    machine_alarms, from Kafka
+--   deploy/sql/ddl/02_milvus.sql     maintenance_manual, the corpus
+--   deploy/sql/ddl/03_models.sql     embedding + planner models
+--   deploy/sql/ddl/04_topics.sql     alarm-context, work-orders
+--   deploy/sql/ddl/05_postgres.sql   the incident store sinks
+--
+--   deploy/sql/jobs/10_retrieve.sql  embed -> VECTOR_SEARCH -> enrich     (the interesting one)
+--   deploy/sql/jobs/20_plan.sql      the planner model call
+--   deploy/sql/jobs/30_incidents.sql incident upserts
+--   deploy/sql/jobs/40_status.sql    the status timeline
+--
+-- Those carry ${PLACEHOLDERS} rendered from .env at submit time, so they are not copy-pasteable
+-- into a SQL client as-is. To get a runnable copy with your own values substituted:
+--
+--   docker compose exec jobmanager sh -c 'cat /opt/sql/ddl/*.sql /opt/sql/jobs/10_retrieve.sql'
+--
+-- or read deploy/submit.sh, which is what assembles and submits them.
+-- =====================================================================
