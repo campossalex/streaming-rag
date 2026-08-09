@@ -134,7 +134,14 @@ services:
         # restart-loops and the output topic stops dead rather than merely slowing down.
         # 4 concurrent keeps well inside the rate limit; 180s is long enough that a genuinely
         # slow call degrades throughput instead of killing the job.
-        table.exec.async-ml-predict.max-concurrent-operations: 4
+        #
+        # The right number depends on the backend, so './run.sh use-openai|use-launchpad|
+        # use-ollama' sets ML_PREDICT_CONCURRENCY in .env rather than this being a constant.
+        # A self-hosted llm-launchpad box needs 1: its FastAPI wrapper hands every request to
+        # a thread pool but shares one vLLM offline LLM engine between them, and that engine
+        # is not safe to drive concurrently -- the second caller gets a 500 out of
+        # LLMEngine._process_sequence_group_outputs rather than a queued request.
+        table.exec.async-ml-predict.max-concurrent-operations: ${ML_PREDICT_CONCURRENCY:-4}
         table.exec.async-ml-predict.timeout: 180s
         table.exec.async-ml-predict.output-mode: ALLOW_UNORDERED
     volumes:

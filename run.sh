@@ -116,6 +116,18 @@ cmd_preflight() {
     docker compose version >/dev/null 2>&1 || die "Docker Compose V2 is required ('docker compose', not 'docker-compose'). See https://docs.docker.com/compose/"
     ok "docker $(docker version --format '{{.Server.Version}}' 2>/dev/null || echo '?'), compose $(docker compose version --short 2>/dev/null || echo '?')"
 
+    # 'docker compose build' refuses to run against buildx older than 0.17.0, but only says so
+    # once the build is already underway. A Linux distribution's docker package often ships an
+    # older buildx, or none at all, so check it here instead of failing three steps later.
+    local buildx_ver
+    buildx_ver=$(docker buildx version 2>/dev/null | awk '{print $2}' | tr -d 'v')
+    if [[ -z "$buildx_ver" ]]; then
+        die "the docker buildx plugin is missing, and 'docker compose build' needs it. On Amazon Linux 2023 run './setup.sh'; elsewhere see https://docs.docker.com/build/install-buildx/"
+    elif [[ "$(printf '0.17.0\n%s\n' "$buildx_ver" | sort -V | head -1)" != "0.17.0" ]]; then
+        die "buildx ${buildx_ver} is too old; 'docker compose build' needs 0.17.0 or later. On Amazon Linux 2023 run './setup.sh' to replace it."
+    fi
+    ok "buildx ${buildx_ver}"
+
     # Milvus alone wants ~2 GB of images; the whole stack plus the Maven cache needs more.
     local avail
     avail=$(df -Pk . | awk 'NR==2 {print int($4/1024/1024)}')
@@ -384,6 +396,9 @@ cmd_use_ollama() {
     set_env_var EMBED_MODEL "nomic-embed-text"
     set_env_var EMBED_DIM "768"
     set_env_var CHAT_MODEL "qwen2.5:3b-instruct"
+    # Ollama queues rather than parallelising by default (OLLAMA_NUM_PARALLEL), so extra
+    # concurrency from Flink buys nothing and only makes each call's latency look worse.
+    set_env_var ML_PREDICT_CONCURRENCY "1"
     ok "${ENV_FILE} points at Ollama; no API key and no outbound traffic"
 
     compose --profile local-llm up -d ollama
@@ -406,6 +421,10 @@ cmd_use_openai() {
     set_env_var EMBED_MODEL "text-embedding-3-small"
     set_env_var EMBED_DIM "1536"
     set_env_var CHAT_MODEL "gpt-4o-mini"
+    # Restore the concurrency too, or a box that had been switched to Ollama or launchpad
+    # stays pinned at 1 and the OpenAI path runs four times slower than it should for no
+    # visible reason.
+    set_env_var ML_PREDICT_CONCURRENCY "4"
     ok "${ENV_FILE} points at OpenAI"
 
     local current
@@ -508,7 +527,21 @@ cmd_use_launchpad() {
     set_env_var EMBED_MODEL "$model"
     set_env_var EMBED_DIM "$dim"
     set_env_var CHAT_MODEL "$chat"
+    # One in-flight completion, not the 4 the OpenAI path uses. llm-launchpad's FastAPI
+    # wrapper dispatches each request into a thread pool but shares a single vLLM offline
+    # LLM engine across those threads, and that engine cannot be driven concurrently: the
+    # second caller's step() walks sequence state the first has already moved on from, and
+    # the request dies as a 500 with a KeyError out of _process_sequence_group_outputs.
+    # Nothing in the wire format says so, and Flink's AsyncWaitOperator turns the 500 into a
+    # failed task, so the job restart-loops instead of degrading.
+    #
+    # This is a client-side accommodation of a server-side bug. If the box is rebuilt on
+    # vLLM's own OpenAI server (vllm.entrypoints.openai.api_server) or on AsyncLLMEngine,
+    # raise this back to 4 by hand -- both handle concurrent requests properly, and batch
+    # them, so the throughput difference is large.
+    set_env_var ML_PREDICT_CONCURRENCY "1"
     ok "${ENV_FILE} points at ${base}"
+    info "model calls are serialised (ML_PREDICT_CONCURRENCY=1); see the note in ${ENV_FILE}"
 
     # The host reaching the box proves nothing about the containers, which is where the
     # model calls actually originate.

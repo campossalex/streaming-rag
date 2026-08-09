@@ -23,6 +23,13 @@ cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly PLUGIN_DIR="/usr/local/lib/docker/cli-plugins"
 readonly BUILDX_FALLBACK="v0.34.1"
 
+# 'docker compose build' refuses to run against an older buildx, with exactly this message:
+#   compose build requires buildx 0.17.0 or later
+# A buildx that is merely present is therefore not good enough, and checking only that the
+# plugin exists is how this gets missed -- an old buildx answers 'docker buildx version'
+# perfectly happily and the build fails much later.
+readonly MIN_BUILDX="0.17.0"
+
 # --------------------------------------------------------------------------------------
 # Output helpers (same vocabulary as run.sh)
 # --------------------------------------------------------------------------------------
@@ -163,6 +170,19 @@ plugin_ok() {
     docker "$1" version >/dev/null 2>&1
 }
 
+# The version docker actually resolves, which is not necessarily the one just installed:
+# several directories are searched and the first hit wins. Reading it back from the CLI is
+# the only honest check.
+buildx_version() {
+    docker buildx version 2>/dev/null | awk '{print $2}' | tr -d 'v'
+}
+
+# True when $1 >= $2, comparing dotted versions. sort -V does the work; equal versions sort
+# first-listed, so the >= case falls out correctly.
+version_ge() {
+    [[ "$(printf '%s\n%s\n' "$2" "$1" | sort -V | head -1)" == "$2" ]]
+}
+
 fetch_plugin() {
     local name="$1" url="$2" dest="${PLUGIN_DIR}/docker-$1"
 
@@ -210,12 +230,22 @@ install_compose() {
 install_buildx() {
     step "Installing the docker buildx plugin"
 
+    local current=""
     if plugin_ok buildx; then
-        ok "docker buildx $(docker buildx version 2>/dev/null | awk '{print $2}')"
+        current=$(buildx_version)
+    fi
+
+    if [[ -n "$current" ]] && version_ge "$current" "$MIN_BUILDX"; then
+        ok "docker buildx v${current}"
         return 0
     fi
+
+    if [[ -n "$current" ]]; then
+        warn "buildx v${current} is older than the v${MIN_BUILDX} 'docker compose build' needs"
+        info "installing a current buildx into ${PLUGIN_DIR}, which docker searches first"
+    fi
     if [[ "$CHECK_ONLY" -eq 1 ]]; then
-        warn "the docker buildx plugin is missing"
+        [[ -n "$current" ]] || warn "the docker buildx plugin is missing"
         return 0
     fi
 
@@ -235,7 +265,19 @@ install_buildx() {
 
     fetch_plugin buildx \
         "https://github.com/docker/buildx/releases/download/${version}/buildx-${version}.linux-${ARCH_GO}"
-    ok "docker buildx ${version}"
+
+    # Read the version back rather than trusting the tag we downloaded. If an older buildx sits
+    # in a directory docker searches ahead of PLUGIN_DIR, it still wins and the build would fail
+    # later with the same message that sent us here.
+    local now
+    now=$(buildx_version)
+    if [[ -z "$now" ]] || ! version_ge "$now" "$MIN_BUILDX"; then
+        warn "docker still resolves buildx v${now:-unknown} after installing ${version}"
+        info "another copy is shadowing ${PLUGIN_DIR}/docker-buildx. Find it with:"
+        info "  ls -l ~/.docker/cli-plugins/docker-buildx /usr/local/lib/docker/cli-plugins/docker-buildx /usr/lib/docker/cli-plugins/docker-buildx /usr/libexec/docker/cli-plugins/docker-buildx"
+        die "buildx v${MIN_BUILDX} or later is required by 'docker compose build'"
+    fi
+    ok "docker buildx v${now}"
 }
 
 # --------------------------------------------------------------------------------------
@@ -290,10 +332,15 @@ verify() {
         warn "'docker compose' does not work"; failed=1
     fi
 
-    if plugin_ok buildx; then
-        ok "docker buildx $(docker buildx version 2>/dev/null | awk '{print $2}')"
-    else
+    local bx
+    bx=$(buildx_version)
+    if [[ -z "$bx" ]]; then
         warn "'docker buildx' does not work"; failed=1
+    elif version_ge "$bx" "$MIN_BUILDX"; then
+        ok "docker buildx v${bx}"
+    else
+        warn "docker buildx v${bx} is too old; 'docker compose build' needs v${MIN_BUILDX} or later"
+        failed=1
     fi
 
     if command -v git >/dev/null 2>&1; then
