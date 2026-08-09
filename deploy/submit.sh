@@ -34,6 +34,25 @@ export MILVUS_COLLECTION
 : "${PG_PASSWORD:=admin1}"
 export PG_URL PG_USER PG_PASSWORD
 
+# Everything below is referenced unquoted by the banner and by envsubst. Under 'set -u' a
+# single missing one aborts this script BEFORE the first submit_one call, so nothing reaches
+# the cluster and the only clue is "line NNN: VAR: unbound variable" -- no mention of .env,
+# and the Flink UI simply shows no jobs, which reads as "submit did nothing".
+#
+# TOP_K is 1 by design rather than a placeholder: job 2 calls ML_PREDICT once per row job 1
+# emits, so a larger K multiplies chat-model spend by K. See jobs/10_retrieve.sql.
+: "${TOP_K:=1}"
+# These two default to the compose service names, same as the Postgres block above.
+: "${MILVUS_ENDPOINT:=milvus-standalone}"
+: "${KAFKA_BOOTSTRAP:=kafka:9092}"
+export TOP_K MILVUS_ENDPOINT KAFKA_BOOTSTRAP
+
+# The models get no default on purpose. A wrong endpoint or model name fails late, inside a
+# running job, as a 404 the pipeline reports as a restart loop -- so say so here instead.
+: "${OPENAI_BASE:?OPENAI_BASE is not set in .env - run './run.sh use-openai', 'use-ollama' or 'use-launchpad <url>'}"
+: "${EMBED_MODEL:?EMBED_MODEL is not set in .env - run './run.sh use-openai', 'use-ollama' or 'use-launchpad <url>'}"
+: "${CHAT_MODEL:?CHAT_MODEL is not set in .env - run './run.sh use-openai', 'use-ollama' or 'use-launchpad <url>'}"
+
 readonly SQL_DIR=/opt/sql
 readonly SUBST='$OPENAI_API_KEY $OPENAI_BASE $EMBED_MODEL $CHAT_MODEL $MILVUS_ENDPOINT $MILVUS_COLLECTION $KAFKA_BOOTSTRAP $TOP_K $PG_URL $PG_USER $PG_PASSWORD'
 
@@ -96,7 +115,12 @@ submit_one() {
     # Judge by evidence of a submitted job, not by exit status. sql-client exits 0 after
     # "[ERROR] Could not execute SQL statement", AND after an uncaught SqlClientException that
     # never reaches the SQL at all -- both were reported as success before this check existed.
-    if ! printf '%s\n' "$out" | grep -q 'Job ID:'; then
+    #
+    # Match BOTH spellings. Older clients print "Job ID: <hex>"; Flink 2.3 prints
+    # "Job has been submitted with JobID <hex>" -- no colon, no space. Grepping only the first
+    # made this check useless against 2.3: it can never match, so every job looks failed even
+    # when the dispatcher accepted it. Anchoring on the 32-hex id is what makes it evidence.
+    if ! printf '%s\n' "$out" | grep -qE 'Job ID: *[0-9a-f]{32}|JobID [0-9a-f]{32}'; then
         echo "  !! ${name} did not produce a Job ID -- nothing was submitted" >&2
         FAILED="$FAILED $name"
     fi
