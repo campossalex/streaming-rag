@@ -267,6 +267,23 @@ corpus_fingerprint() {
     printf '%s@%s' "$(read_env_var EMBED_MODEL)" "$(read_env_var EMBED_DIM)"
 }
 
+# Every use-* command only rewrites .env. The containers read it at start, and FLINK_PROPERTIES
+# interpolates ML_PREDICT_CONCURRENCY from it, so nothing takes effect until './run.sh up'
+# recreates them -- and that recreate is not free. This session cluster runs without HA, so the
+# JobManager keeps its job graphs in memory only ("Successfully recovered 0 persisted job
+# graphs" on every boot). Recreating it silently drops every running job: the UI comes back with
+# an empty job list, free slots and all-zero counters, which reads as "submit did nothing"
+# rather than "the cluster was replaced underneath them".
+restart_note() {
+    if compose ps --status running --services 2>/dev/null | grep -q '^jobmanager$'; then
+        warn "the Flink containers are still running with the OLD settings"
+        info "./run.sh up      recreate them -- this DROPS any running jobs"
+        info "./run.sh submit  re-submit the four jobs afterwards"
+    else
+        info "start the stack with './run.sh up', then './run.sh submit'"
+    fi
+}
+
 # Called by every use-* command with the fingerprint taken BEFORE it wrote anything, so the
 # three share one rule instead of each carrying its own copy to drift out of step.
 reseed_if_needed() {
@@ -407,6 +424,7 @@ cmd_use_ollama() {
     compose exec -T ollama ollama pull qwen2.5:3b-instruct
     ok "models pulled"
     reseed_if_needed "$before"
+    restart_note
 }
 
 # Restores the OpenAI defaults. Without it, use-ollama and use-launchpad are one-way
@@ -441,6 +459,7 @@ cmd_use_openai() {
         ok "OPENAI_API_KEY is set (${current:0:7}...)"
     fi
     reseed_if_needed "$before"
+    restart_note
 }
 
 # Points the stack at a self-hosted llm-launchpad box, which serves the same OpenAI wire
@@ -559,6 +578,7 @@ cmd_use_launchpad() {
     fi
 
     reseed_if_needed "$before"
+    restart_note
 }
 
 # --------------------------------------------------------------------------------------
