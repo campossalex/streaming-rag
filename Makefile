@@ -23,7 +23,8 @@ init:  ## Create .env from the template if absent
 	  exit 1; \
 	fi
 	@grep -q '^OPENAI_API_KEY=sk-replace-me' .env && { \
-	  echo "OPENAI_API_KEY in .env is still the placeholder. Set a real key, or switch to the Ollama block."; \
+	  echo "OPENAI_API_KEY in .env is still the placeholder. Set a real key, or pick a"; \
+	  echo "provider that needs none:  ./run.sh use-ollama  |  ./run.sh use-launchpad <url>"; \
 	  exit 1; \
 	} || true
 	@echo ".env looks configured."

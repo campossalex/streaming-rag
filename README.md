@@ -367,6 +367,67 @@ models via Ollama and use no key at all), then builds the connector, starts Milv
 Flink, waits for each to be genuinely healthy, bootstraps the corpus, checks the connector is
 loaded, and submits the pipeline. Re-running it is safe.
 
+### Choosing a model provider
+
+Both models — the embedder and the planner — are reached over the OpenAI wire format, so a
+provider is just a base URL and a key. Three are supported, and switching is one command:
+
+| Provider | Command | Key | Embedding width |
+|---|---|---|---|
+| OpenAI (default) | `./run.sh use-openai` | yours | 1536 |
+| Ollama, on this machine | `./run.sh use-ollama` | none | 768 |
+| A self-hosted llm-launchpad box | `./run.sh use-launchpad <url> [token]` | its `API_TOKEN`, if set | read from the box |
+
+```bash
+./run.sh use-launchpad http://my-gpu-box:5001/v1 my-api-token
+```
+
+`use-launchpad` reads the served embedding model, its dimension and the chat model from the box's
+health endpoint rather than asking you to type them, because an `EMBED_DIM` that disagrees with
+the endpoint produces a collection the vectors cannot be written to — and the seeder only
+discovers that after dropping the old one. If the health response names no chat model it falls
+back to `CHAT_MODEL=local` and says so; set it by hand if the planner later returns a 404.
+
+Two things to know about the URL. It must end in `/v1` (the model DDL appends `/embeddings` and
+`/chat/completions` to it), and it must be reachable **from inside the containers**: the seeder
+and both Flink services make the calls, so `localhost` means the container itself and is
+rejected. Use the box's hostname or IP, or `host.docker.internal` when it runs on this machine.
+`use-launchpad` checks reachability from `jobmanager` as well when the stack is already up.
+
+**Switching re-seeds only when it has to.** The corpus is fingerprinted by embedding model *and*
+width, and `use-*` offers a re-seed only when that fingerprint moves. Re-pointing at a restarted
+box serving the same model is free; changing the model is not, and a stale collection fails at
+query time inside a running job, as a restart loop, long after the command that caused it
+reported success.
+
+The fingerprint covers the model name and not just the width for a reason: **a different model at
+the same width produces vectors that are silently incomparable with the stored ones.** The
+seeder's only guard is the dimension check, which such a switch passes cleanly while retrieval
+quietly gets worse. `./run.sh audit` is what catches it.
+
+#### Running the box on its own instance
+
+The intended shape is llm-launchpad on a dedicated GPU instance and this stack on another, with
+the box started first and its address passed in:
+
+```bash
+./run.sh use-launchpad http://<launchpad-private-ip>:5001/v1 <token>
+```
+
+- **Prefer the private/VPC address when both instances share a VPC.** A public IP sends every
+  embedding and chat call out of the VPC and back, and it changes whenever the instance is
+  stopped and started without an Elastic IP.
+- **The launchpad instance's security group has to allow this instance on the API port.** That is
+  the most likely failure, and it is invisible from a browser on your laptop. The reachability
+  probe `use-launchpad` runs from `jobmanager` is the check to trust — the containers route out
+  of the instance exactly as the host does, so a host that connects and a container that cannot
+  points at the security group, not at compose.
+- Over plain `http://`, the token travels in the clear, and so does every prompt — the operator's
+  alarm text and the retrieved manual section. Restrict the port by security group, or terminate
+  TLS on the box.
+- Milvus and the corpus stay local to this instance. The box is only asked for embeddings and
+  chat completions; nothing about the corpus leaves.
+
 **`up` re-seeds the corpus every time**, so no run inherits the previous one's Milvus state.
 This is deliberate. Milvus persists collection *data* to `./volumes`, but it does not restore
 the in-memory *load state* on boot, and a search against an unloaded collection fails at
@@ -427,8 +488,9 @@ later as an opaque 401 inside the ML_PREDICT operator.
 | `env file .env not found` | Run `make init` first |
 | Flink containers never start | They gate on `standalone` being healthy; Milvus needs ~90s. `make ps` |
 | `collection not loaded` / `collection not found` | Milvus will not search an unloaded collection, and does not restore load state on boot. `up` now re-seeds every time, so this should not recur; `./run.sh seed` fixes it by hand |
-| Retrieval returns odd matches | `search.metric` in the DDL disagrees with the index metric, or `EMBED_DIM` is wrong. The seeder now fails loudly on a dimension mismatch |
-| 401 from the model | Bad or partially copied key. `./run.sh check-key` to test it, `./run.sh set-key` to replace it. Keys are now validated against the API before being stored |
+| Retrieval returns odd matches | `search.metric` in the DDL disagrees with the index metric, or `EMBED_DIM` is wrong. The seeder now fails loudly on a dimension mismatch. After any provider switch, re-run `./run.sh seed` |
+| 401 from the model | Bad or partially copied key. `./run.sh check-key` to test it, `./run.sh set-key` to replace it. Keys are now validated against the API before being stored. Against a self-hosted box, the key is its `API_TOKEN` |
+| Model calls fail only inside the containers | The base URL is reachable from this machine but not from the compose network — typically `localhost`. Use a routable host or `host.docker.internal` |
 | Job runs, no output | Nothing consumes `work-orders` yet. `./run.sh consume` |
 | `failed to solve: image ...: already exists` | Two services declaring `build:` for the same `image:` tag. Only `jobmanager` builds; `taskmanager` reuses the tag |
 | `pull access denied for flink-milvus` | The image was never built. `./run.sh build` |
@@ -470,6 +532,10 @@ variables, which is why the pipeline is a template. `deploy/submit.sh` renders i
 inside the container, restricted to a named variable list, and deletes the rendered file on exit.
 The key reaches disk nowhere in the repo. This is a workaround for a real gap, not a solution — for
 production use a secrets manager and a catalog that supports secret references.
+
+The same path carries a self-hosted box's `API_TOKEN`: it is just another bearer token in
+`OPENAI_API_KEY`. Note it will not match the `sk-`-shaped patterns a secret scan looks for,
+so treat `.env` as sensitive regardless of which provider is configured.
 
 ## Loading the connector jar into the deployment
 

@@ -174,19 +174,24 @@ def embed(texts):
                if not OPENAI_KEY.startswith("sk-") and "api.openai.com" in OPENAI_BASE else "")
             + "  Fix it with:  ./run.sh set-key      then re-run:  ./run.sh seed\n"
               "  Or go fully local with no key:  ./run.sh use-ollama\n"
+              "  Or point at a self-hosted box:  ./run.sh use-launchpad <url> [token]\n"
+              "  A self-hosted box that sets API_TOKEN needs that token as OPENAI_API_KEY.\n"
         )
     except openai.NotFoundError:
         sys.exit(
             f"\nThe endpoint returned 404 for model '{EMBED_MODEL}' at {OPENAI_BASE}.\n"
             f"  If using Ollama, pull it first: docker compose exec ollama ollama pull {EMBED_MODEL}\n"
+            f"  If using llm-launchpad, its embeddings endpoint answers 404 when\n"
+            f"  ENABLE_EMBEDDINGS=false — check {OPENAI_BASE.rstrip('/').removesuffix('/v1')}/ .\n"
         )
     vectors = [item.embedding for item in response.data]
     actual = len(vectors[0])
     if actual != EMBED_DIM:
         sys.exit(
             f"EMBED_DIM is {EMBED_DIM} but {EMBED_MODEL} returned {actual} dimensions. "
-            f"Set EMBED_DIM={actual} in .env and re-run. A dimension mismatch between the "
-            f"collection and the query vector is the most common cause of retrieval failures."
+            f"Set EMBED_DIM={actual} in .env and re-run — or let './run.sh use-launchpad' "
+            f"read it from the endpoint. A dimension mismatch between the collection and "
+            f"the query vector is the most common cause of retrieval failures."
         )
     return vectors
 

@@ -186,10 +186,11 @@ cmd_config() {
 
     if [[ "$current" == "sk-replace-me" || -z "$current" ]]; then
         if [[ "${NON_INTERACTIVE:-0}" == "1" ]]; then
-            die "OPENAI_API_KEY is not set. Either export OPENAI_API_KEY, or edit ${ENV_FILE}, or run './run.sh use-ollama' for a fully local setup with no key."
+            die "OPENAI_API_KEY is not set. Either export OPENAI_API_KEY, or edit ${ENV_FILE}, or run './run.sh use-ollama' for a fully local setup with no key, or './run.sh use-launchpad <url>' to use a self-hosted llm-launchpad box."
         fi
         printf '\n  The pipeline calls an embedding model and a chat model.\n'
         printf '  Paste an OpenAI API key, or press Enter to switch to local models via Ollama.\n'
+        printf "  Already have a self-hosted box? Ctrl-C, then './run.sh use-launchpad <url> [token]'.\n"
         printf '  Key (not echoed): '
         local entered=""
         read -rs entered || true
@@ -235,6 +236,81 @@ set_env_var() {
         printf '%s=%s\n' "$key" "$value" >> "$ENV_FILE"
     fi
     chmod 600 "$ENV_FILE"
+}
+
+# --------------------------------------------------------------------------------------
+# Provider switching
+#
+# Re-seeding costs one embedding call per 100 documents and, against a remote box, sends
+# the whole corpus across the network. The switch commands below therefore ask for it only
+# when the corpus is genuinely invalid -- re-pointing at a restarted box that serves the
+# same model is free.
+# --------------------------------------------------------------------------------------
+
+# Both halves matter. A DIFFERENT MODEL AT THE SAME WIDTH produces vectors that are not
+# comparable with the stored ones, and nothing downstream catches it: the seeder's only
+# guard is the dimension check, which such a switch passes cleanly while retrieval quietly
+# gets worse. Width alone is not the fingerprint.
+corpus_fingerprint() {
+    printf '%s@%s' "$(read_env_var EMBED_MODEL)" "$(read_env_var EMBED_DIM)"
+}
+
+# Called by every use-* command with the fingerprint taken BEFORE it wrote anything, so the
+# three share one rule instead of each carrying its own copy to drift out of step.
+reseed_if_needed() {
+    local before="$1" after
+    after=$(corpus_fingerprint)
+
+    if [[ "$before" == "$after" ]]; then
+        ok "embedding model unchanged (${after}); the existing collection is still valid"
+        return
+    fi
+
+    warn "the embedding model changed: ${before:-none} -> ${after}"
+    info "the stored vectors came from the old model, so the collection must be rebuilt"
+
+    if ! compose ps --status running --services 2>/dev/null | grep -q '^standalone$'; then
+        info "Milvus is not running; './run.sh up' re-seeds as its last step"
+        return
+    fi
+    if [[ "${NON_INTERACTIVE:-0}" == "1" ]]; then
+        warn "NON_INTERACTIVE=1, so the collection was left stale -- run './run.sh seed'"
+        return
+    fi
+
+    printf '     re-seed the corpus now? [Y/n] '
+    local answer=""
+    read -r answer || true
+    if [[ "$answer" =~ ^[Nn] ]]; then
+        info "left as it is; run './run.sh seed' before submitting, or retrieval will be wrong"
+        return
+    fi
+    cmd_seed
+}
+
+# Reads one dotted path out of a JSON document. Prints nothing -- and still succeeds -- when
+# the path is absent, so each caller decides what a miss means.
+#
+# This replaced a pair of sed expressions shaped '"embeddings"[^}]*"dim"...', which depend on
+# key order and on no closing brace falling in between. A nested or reordered health response
+# made them return empty, and empty was then reported as "the box has no embeddings block" --
+# sending you off to reconfigure a box that was answering perfectly well.
+parse_health() {
+    printf '%s' "$1" | python3 -c '
+import json, sys
+
+try:
+    node = json.load(sys.stdin)
+except Exception:
+    sys.exit(0)
+for part in sys.argv[1].split("."):
+    if not isinstance(node, dict) or part not in node:
+        sys.exit(0)
+    node = node[part]
+if isinstance(node, bool) or not isinstance(node, (str, int, float)):
+    sys.exit(0)
+print(node)
+' "$2" 2>/dev/null || true
 }
 
 # A wrong key otherwise surfaces minutes later as a traceback from the seeder. Check the
@@ -301,6 +377,8 @@ cmd_set_key() {
 
 cmd_use_ollama() {
     step "Switching to local models (Ollama)"
+    local before
+    before=$(corpus_fingerprint)
     set_env_var OPENAI_API_KEY "ollama"
     set_env_var OPENAI_BASE "http://ollama:11434/v1"
     set_env_var EMBED_MODEL "nomic-embed-text"
@@ -313,7 +391,141 @@ cmd_use_ollama() {
     compose exec -T ollama ollama pull nomic-embed-text
     compose exec -T ollama ollama pull qwen2.5:3b-instruct
     ok "models pulled"
-    warn "EMBED_DIM changed to 768, so the Milvus collection must be rebuilt: ./run.sh seed"
+    reseed_if_needed "$before"
+}
+
+# Restores the OpenAI defaults. Without it, use-ollama and use-launchpad are one-way
+# doors: set-key only rewrites the key, leaving OPENAI_BASE and the model names pointing
+# somewhere else, which then fails as a 404 on a model OpenAI has never heard of.
+cmd_use_openai() {
+    step "Switching to OpenAI"
+    [[ -f "$ENV_FILE" ]] || cp "$ENV_TEMPLATE" "$ENV_FILE"
+    local before
+    before=$(corpus_fingerprint)
+    set_env_var OPENAI_BASE "https://api.openai.com/v1"
+    set_env_var EMBED_MODEL "text-embedding-3-small"
+    set_env_var EMBED_DIM "1536"
+    set_env_var CHAT_MODEL "gpt-4o-mini"
+    ok "${ENV_FILE} points at OpenAI"
+
+    local current
+    current=$(read_env_var OPENAI_API_KEY)
+    if [[ -z "$current" || "$current" == "sk-replace-me" || "$current" == "ollama" \
+          || "$current" == "not-needed" ]]; then
+        # The stored value is a placeholder from another provider, so it cannot work here.
+        if [[ "${NON_INTERACTIVE:-0}" == "1" ]]; then
+            warn "no usable OPENAI_API_KEY in ${ENV_FILE} — set one with './run.sh set-key'"
+        else
+            cmd_set_key
+        fi
+    else
+        ok "OPENAI_API_KEY is set (${current:0:7}...)"
+    fi
+    reseed_if_needed "$before"
+}
+
+# Points the stack at a self-hosted llm-launchpad box, which serves the same OpenAI wire
+# format for both /chat/completions and /embeddings. No OpenAI account, no egress.
+cmd_use_launchpad() {
+    step "Switching to a self-hosted llm-launchpad box"
+    local base="${1:-}" token="${2:-not-needed}"
+
+    if [[ -z "$base" ]]; then
+        die "usage: ./run.sh use-launchpad http://<host>:5001/v1 [API_TOKEN]
+     The URL is the box's API root; the port is API_PORT from its deploy.conf."
+    fi
+
+    base="${base%/}"
+    [[ "$base" == */v1 ]] || base="${base}/v1"
+
+    # The models are called from inside the Flink and seeder containers, not from here.
+    # A loopback address resolves to the container itself, so it validates perfectly on
+    # this machine and then fails at the first ML_PREDICT — minutes later, inside a job.
+    if [[ "$base" == *"://localhost"* || "$base" == *"://127.0.0.1"* ]]; then
+        die "'${base}' is loopback, which inside a container means the container itself.
+     Use the box's hostname or IP, or host.docker.internal if it runs on this machine."
+    fi
+
+    # Read the served models and the embedding width from the box rather than asking for
+    # them: a hand-typed EMBED_DIM that disagrees with the endpoint builds a collection the
+    # vectors cannot be written to, and the seeder only catches that after the drop.
+    command -v python3 >/dev/null 2>&1 \
+        || die "python3 is needed to read the box's health response, and is not installed."
+
+    local health dim model="" chat="" path before
+    health=$(curl -sS --max-time 10 "${base%/v1}/" 2>/dev/null || echo "")
+    [[ -n "$health" ]] || die "no response from ${base%/v1}/ — is the box up and the port open?
+     Between two EC2 instances this is usually the launchpad box's security group: it has
+     to allow this instance on the API port."
+
+    dim=$(parse_health "$health" embeddings.dim)
+    if [[ -z "$dim" ]]; then
+        die "${base%/v1}/ answered but reports no embeddings block.
+     Set ENABLE_EMBEDDINGS=true in the box's deploy.conf and re-run its deploy.sh."
+    fi
+
+    # The model NAME is half the corpus fingerprint, so a miss here is not cosmetic: every
+    # box would fingerprint as 'local@<dim>' and a genuine model change between two boxes of
+    # equal width would read as no change at all. Try the plausible keys before giving up.
+    for path in embeddings.model embeddings.model_id embeddings.name embeddings.model.name; do
+        model=$(parse_health "$health" "$path")
+        [[ -n "$model" ]] && break
+    done
+    if [[ -n "$model" ]]; then
+        ok "the box serves embedding model ${model} at ${dim} dimensions"
+    else
+        model="local"
+        ok "the box serves an embedding model at ${dim} dimensions"
+        warn "the health response names no embedding model, so EMBED_MODEL is set to 'local'"
+        info "set it by hand in ${ENV_FILE} if you switch between boxes of the same width --"
+        info "the re-seed prompt compares model and width, and cannot see a change you hide"
+    fi
+
+    # The chat model is discovered the same way, but the key it sits under is not fixed
+    # across llm-launchpad versions, so try the plausible ones. A literal 'local' is only
+    # safe on a box that ignores the model field -- say so rather than letting it surface
+    # later as a 404 inside the planner job, which is exactly the late failure the
+    # embedding discovery above exists to avoid.
+    for path in chat.model chat_completions.model llm.model model; do
+        chat=$(parse_health "$health" "$path")
+        [[ -n "$chat" ]] && break
+    done
+    if [[ -n "$chat" ]]; then
+        ok "the box serves chat model ${chat}"
+    else
+        chat="local"
+        warn "the health response names no chat model, so CHAT_MODEL is set to 'local'"
+        info "if the planner job later fails with a 404, set CHAT_MODEL in ${ENV_FILE} by hand"
+    fi
+
+    # Same probe the OpenAI path uses; it hits ${base}/models, which llm-launchpad serves.
+    validate_openai_key "$token" "$base" \
+        || die "the box rejected the token. Pass its API_TOKEN as the second argument."
+
+    before=$(corpus_fingerprint)
+    set_env_var OPENAI_API_KEY "$token"
+    set_env_var OPENAI_BASE "$base"
+    set_env_var EMBED_MODEL "$model"
+    set_env_var EMBED_DIM "$dim"
+    set_env_var CHAT_MODEL "$chat"
+    ok "${ENV_FILE} points at ${base}"
+
+    # The host reaching the box proves nothing about the containers, which is where the
+    # model calls actually originate.
+    if compose ps --status running --services 2>/dev/null | grep -q '^jobmanager$'; then
+        if compose exec -T jobmanager curl -sf --max-time 10 -o /dev/null "${base}/models" 2>/dev/null; then
+            ok "jobmanager can reach ${base} too"
+        else
+            warn "jobmanager cannot reach ${base} even though this host can — the pipeline will fail at the first model call"
+            info "the containers route out of this instance the same way it does, so this is"
+            info "normally the launchpad security group rather than anything in compose"
+        fi
+    else
+        info "the stack is not up, so only this host's reachability was checked — re-run this"
+        info "command after './run.sh up' to confirm the containers can reach it too"
+    fi
+
+    reseed_if_needed "$before"
 }
 
 # --------------------------------------------------------------------------------------
@@ -353,6 +565,10 @@ wait_for_health() {
         esac
         if [[ $waited -ge $timeout ]]; then
             printf '\n'
+            exit_verdict "$container"
+            docker logs "$container" 2>&1 \
+                | grep -m1 -A 15 -E 'fatal error:|panic:|signal SIG|\[FATAL\]|FATAL |Exception in thread|Caused by:|^Error:|cannot allocate memory|out of memory' \
+                | sed 's/^/       /' || true
             docker logs --tail 40 "$container" 2>&1 | sed 's/^/       /' || true
             die "${container} was not healthy after ${timeout}s (last status: ${status})"
         fi
@@ -362,21 +578,94 @@ wait_for_health() {
     done
 }
 
+# A crashing process prints its reason FIRST and then dumps state: a Go fatal error dumps
+# every goroutine, a JVM dumps every thread. Both run to thousands of lines, so '--tail'
+# shows only the dump and never the cause -- which is exactly the line the user needs.
+# Pull the first cause-shaped line out of the whole log instead.
+crash_cause() {
+    compose logs --no-color "$1" 2>&1 \
+        | grep -m1 -A 15 -E 'fatal error:|panic:|signal SIG|\[FATAL\]|FATAL |Exception in thread|Caused by:|^Error:|cannot allocate memory|out of memory' \
+        || true
+}
+
+# Print why a container died, as far as Docker itself knows. The exit code narrows it down a
+# lot, but do not over-read it: 134 is only "the process called abort()", which for a Go binary
+# means any panic or log.Fatal at all. The reason is in the log line crash_cause digs out, not
+# in the number. Memory is what 137 means, and only alongside OOMKilled.
+exit_verdict() {
+    local container="$1" code oom
+    code=$(docker inspect -f '{{.State.ExitCode}}' "$container" 2>/dev/null || echo "?")
+    oom=$(docker inspect -f '{{.State.OOMKilled}}' "$container" 2>/dev/null || echo "false")
+    printf '  exit code %s' "$code" >&2
+    if [[ "$oom" == "true" ]]; then
+        printf ' (OOM-killed by the kernel)' >&2
+    fi
+    printf '\n' >&2
+    case "$code" in
+        134) printf '  %s134 is SIGABRT: the process panicked or hit a fatal error. See the first%s\n' \
+                 "${C_YELLOW}" "${C_RESET}" >&2
+             printf '  error below -- it is the cause; the goroutine dump after it is not.\n' >&2 ;;
+        137) printf '  %s137 is SIGKILL, normally the kernel or a container limit reclaiming memory.%s\n' \
+                 "${C_YELLOW}" "${C_RESET}" >&2
+             printf '  This stack wants 8 GiB or more; the host has %s.\n' \
+                 "$(free -h 2>/dev/null | awk 'NR==2{print $2" total, "$7" available"}' || echo 'an unknown amount')" >&2 ;;
+        132) printf '  %s132 is SIGILL: the CPU lacks an instruction set the image was built for.%s\n' \
+                 "${C_YELLOW}" "${C_RESET}" >&2 ;;
+    esac
+}
+
 # compose reports "dependency failed to start: container X exited (1)" and nothing else.
 # The reason is always in that container's log, so print it rather than making the user hunt.
 dump_broken_containers() {
-    local svc state
+    local svc state cause container
     for svc in $(compose config --services 2>/dev/null); do
         state=$(compose ps -a --status exited --status dead --format '{{.Service}}' 2>/dev/null \
                     | grep -Fx "$svc" || true)
         [[ -n "$state" ]] || continue
-        printf '\n%s----- last 40 log lines from %s -----%s\n' "${C_YELLOW}" "$svc" "${C_RESET}" >&2
+        container=$(compose ps -a --format '{{.Name}}' "$svc" 2>/dev/null | head -1)
+        printf '\n%s----- %s died -----%s\n' "${C_YELLOW}" "$svc" "${C_RESET}" >&2
+        if [[ -n "$container" ]]; then
+            exit_verdict "$container"
+        fi
+        cause=$(crash_cause "$svc")
+        if [[ -n "$cause" ]]; then
+            printf '\n  first error in the log:\n' >&2
+            sed 's/^/  /' <<<"$cause" >&2
+        fi
+        printf '\n  last 40 log lines:\n' >&2
         compose logs --no-color --tail 40 "$svc" 2>&1 | sed 's/^/  /' >&2
+    done
+}
+
+# Docker creates a missing bind-mount source directory as root:root 0755. The Milvus image
+# runs as a non-root user, so its first mkdir under /var/lib/milvus then fails with EACCES and
+# the process aborts: exit 134, with the one useful line ("failed to mkdir ... permission
+# denied") buried under a full goroutine dump.
+#
+# This never reproduces on macOS. Docker Desktop's bind mounts go through a VM filesystem that
+# synthesises ownership, so any container uid can write and the host modes are irrelevant. On a
+# native Linux host they are real and enforced, so the same compose file fails.
+#
+# Creating the directories here, before compose can, and opening the mode is the portable fix:
+# it works whatever uid each image runs as, and needs no root. These hold local demo state
+# only -- Milvus segments, etcd's keyspace, MinIO's object store -- all of it recreated by
+# './run.sh clean && ./run.sh all'.
+prepare_bind_mounts() {
+    local dir owner base="${DOCKER_VOLUME_DIRECTORY:-.}"
+    for dir in "$base/volumes/etcd" "$base/volumes/minio" "$base/volumes/milvus"; do
+        mkdir -p "$dir" 2>/dev/null || true
+        [[ -d "$dir" ]] || die "cannot create ${dir} under $(pwd). Check the permissions on that directory."
+        if ! chmod 0777 "$dir" 2>/dev/null; then
+            owner=$(stat -c '%U' "$dir" 2>/dev/null || stat -f '%Su' "$dir" 2>/dev/null || echo "another user")
+            warn "${dir} is owned by ${owner} and could not be made writable"
+            info "a previous run left it behind as root; remove it with 'sudo rm -rf volumes' and re-run"
+        fi
     done
 }
 
 cmd_up() {
     step "Starting Milvus, Kafka and Flink"
+    prepare_bind_mounts
     # taskmanager uses pull_policy: never, so a missing image would otherwise surface as an
     # opaque container-create failure.
     docker image inspect "$FLINK_IMAGE" >/dev/null 2>&1 \
@@ -887,6 +1176,10 @@ run.sh - Flink 2.3 + Milvus streaming RAG stack
   ./run.sh preflight      check Docker, disk space and port availability
   ./run.sh config         create .env and set the OpenAI token (prompts if needed)
   ./run.sh use-ollama     switch to local models, no API key, no outbound traffic
+  ./run.sh use-launchpad <url> [token]
+                          switch to a self-hosted llm-launchpad box (OpenAI-compatible),
+                          e.g. ./run.sh use-launchpad http://my-box:5001/v1 mytoken
+  ./run.sh use-openai     switch back to OpenAI
   ./run.sh set-key        re-enter the API key, validated before it is stored
   ./run.sh check-key      test the configured key against the API
   ./run.sh build          build the connector and the Flink image
@@ -925,6 +1218,8 @@ main() {
         preflight)   cmd_preflight ;;
         config)      cmd_config ;;
         use-ollama)  cmd_use_ollama ;;
+        use-launchpad) cmd_use_launchpad "$@" ;;
+        use-openai)  cmd_use_openai ;;
         set-key)     cmd_set_key ;;
         check-key)   cmd_check_key ;;
         build)       cmd_build ;;
