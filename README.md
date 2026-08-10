@@ -1,4 +1,4 @@
-# flink-connector-milvus
+# Streaming RAG
 
 A Milvus vector-search source for Apache Flink 2.2+, scoped to **corpus retrieval** — enough to run
 the VVP 3 / VERA workshop pipeline on open-source Flink with the SQL unchanged.
